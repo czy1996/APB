@@ -1,0 +1,46 @@
+{
+  "well": {
+    "number_of_casing": 3,
+    "casing1": {
+      "depth": 3860,
+      "ro": 244.5,
+      "ri": 226.59,
+      "toc": 2100
+    },
+    "casing2": {
+      "depth": 2300,
+      "ro": 339.7,
+      "ri": 320.42,
+      "toc": 700
+    },
+    "casing3": {
+      "depth": 3860,
+      "ro": 508.0,
+      "ri": 485.75,
+      "toc": 0
+    },
+    "tubing": {
+      "ro": 88.9,
+      "ri": 76.0
+    },
+    "etc": {
+
+    }
+  },
+  "thermal": {
+    "m": 0.041,
+    "W": 150,
+    "Cp_oil": 3000,
+    "Cp_annular": 4000,
+    "h": 12800,
+    "Kc": 45,
+    "Kt": 45,
+    "Ka": 0.94,
+    "Kcem": 1.16,
+    "Ke": 2.13,
+    "density_oil": 850,
+    "density_annular": 1300,
+    "ae": 0.00000115,
+    "temp_surface": 4
+  }
+}
