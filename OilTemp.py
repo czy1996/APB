@@ -50,8 +50,6 @@ class OilTemperature(_Symbols):
         return TD
 
 
-
-
 if __name__ == '__main__':
     init_printing(use_unicode=True)
 
