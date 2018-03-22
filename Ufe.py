@@ -1,4 +1,4 @@
-from sympy import *
+from sympy import Piecewise, ln
 
 from _Symbols import _Symbols
 
