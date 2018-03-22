@@ -10,7 +10,11 @@ class Ufe(_Symbols):
         self.params = temp.params
         self.depth = self.params['well']['casing1']['depth'] - self.temp.Z
 
-    def expr(self):
+    def rules(self):
+        """
+        井身结构变化规则
+        :return: list
+        """
         depth_of_casing2 = self.params['well']['casing2']['depth']
         Ufe_1 = (
             self.Ufe_1(),
@@ -40,15 +44,22 @@ class Ufe(_Symbols):
             self.depth > 0,
         )
 
-        expr = Piecewise(
+        return [
             Ufe_1,
             Ufe_2,
             Ufe_3,
             Ufe_4,
             Ufe_5,
+        ]
+
+    def expr(self):
+        rules = self.rules()
+
+        _expr = Piecewise(
+            *rules,
         )
 
-        return expr
+        return _expr
 
     def Ufe_1(self):
         """
@@ -100,6 +111,10 @@ class Ufe(_Symbols):
         return Ufe
 
     def Ufe_4(self):
+        """
+        从表层套管鞋到第二层 toc
+        :return:
+        """
         Ufe = 1 / \
               (1 / self.h
                + self.rti / self.Kt * ln(self.rto / self.rti)
@@ -115,6 +130,10 @@ class Ufe(_Symbols):
         return Ufe
 
     def Ufe_5(self):
+        """
+        从第二层他 toc 到井口
+        :return:
+        """
         Ufe = 1 / \
               (1 / self.h
                + self.rti / self.Kt * ln(self.rto / self.rti)
