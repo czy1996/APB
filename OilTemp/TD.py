@@ -1,6 +1,6 @@
 from sympy import Piecewise, ln, exp, sqrt
 
-from _Symbols import _Symbols
+from OilTemp._Symbols import _Symbols
 
 
 class TD(_Symbols):

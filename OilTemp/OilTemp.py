@@ -1,9 +1,9 @@
 from sympy import *
 import json
 
-from Ufe import Ufe
-from TD import TD
-from _Symbols import _Symbols
+from OilTemp.Ufe import Ufe
+from OilTemp.TD import TD
+from OilTemp._Symbols import _Symbols
 
 
 class OilTemperature(_Symbols):
