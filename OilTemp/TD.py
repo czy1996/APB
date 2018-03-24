@@ -4,7 +4,16 @@ from OilTemp._Symbols import _Symbols
 
 
 class TD(_Symbols):
+    """
+    本模块用来返回 TD 的表达式
+    表达式为一个分段函数 (Piecewise) , 与井深结构相关
+    """
+
     def __init__(self, temp):
+        """
+
+        :param temp: OilTemperature Class
+        """
         super().__init__()
         self.temp = temp
         self.params = temp.params

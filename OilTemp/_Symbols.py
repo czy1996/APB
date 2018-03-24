@@ -2,7 +2,11 @@ from sympy import Symbol
 
 
 class _Symbols:
+
     def __init__(self):
+        """
+        本模块包含了所有计算温度曲线时所用到的符号
+        """
         self.init_symbols()
 
     def init_symbols(self):
@@ -63,6 +67,3 @@ class _Symbols:
 
         # 地层热扩散系数
         self.ae = Symbol('ae')
-
-        # 井筒尺寸
-        self.rw = Symbol('rw')

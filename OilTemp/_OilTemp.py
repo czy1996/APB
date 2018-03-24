@@ -45,6 +45,8 @@ class OilTemperature(_Symbols):
 
 
 if __name__ == '__main__':
+    # 以下代码只有在本文件执行时才会执行
+    # 在本文件作为模块引入时不会执行
     init_printing(use_unicode=True)
 
     with open('data.json', 'r') as f:
