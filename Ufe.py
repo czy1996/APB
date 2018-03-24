@@ -124,7 +124,7 @@ class Ufe(_Symbols):
                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
                + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-               + self.rti / self.Kcem * ln(self.rcem / self.rc3o)
+               + self.rti / self.Kcem * ln(self.tcem / self.rc3o)
                )
 
         return Ufe
@@ -143,7 +143,7 @@ class Ufe(_Symbols):
                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
                + self.rti / self.Ka * ln(self.rc3i / self.rc2o)
                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-               + self.rti / self.Kcem * ln(self.rcem / self.rc3o)
+               + self.rti / self.Kcem * ln(self.tcem / self.rc3o)
                )
 
         return Ufe
@@ -158,7 +158,7 @@ class Ufe(_Symbols):
                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
                + self.rti / self.Ka * ln(self.rc3i / self.rc2o)
                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-               + self.rti / self.Kcem * ln(self.rcem / self.rc3o)
+               + self.rti / self.Kcem * ln(self.tcem / self.rc3o)
                )
 
         return Ufe

@@ -2,6 +2,7 @@ from sympy import *
 import json
 
 from Ufe import Ufe
+from TD import TD
 from _Symbols import _Symbols
 
 
@@ -13,9 +14,10 @@ class OilTemperature(_Symbols):
         self.params = params
 
         self._Ufe = Ufe(self)
+        self._TD = TD(self)
 
         # 替换计算参数 LR
-        self.TD = self.init_expr_TD()
+        self.TD = self._TD.expr()
 
         self.Ufe = self._Ufe.expr()
 
@@ -40,14 +42,6 @@ class OilTemperature(_Symbols):
         LR = 2 * pi * self.rti * self.Ufe * self.Ke / (self.Ke + self.rti * self.Ufe * self.TD)
 
         return LR
-
-    def init_expr_TD(self):
-        td = self.t * self.ae / self.rw ** 2
-
-        TD = ln(exp(-0.2 * td) +
-                (1.5 - 0.3719 * exp(-td)) * sqrt(td))
-
-        return TD
 
 
 if __name__ == '__main__':

@@ -57,6 +57,7 @@ class _Symbols:
         self.rc3o = Symbol('rc3o')
         self.Kcem = Symbol('Kcem')
         self.rcem = Symbol('rcem')
+        self.tcem = Symbol('tcem')
 
         self.t = Symbol('t')
 
