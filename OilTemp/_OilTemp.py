@@ -13,10 +13,11 @@ class OilTemperature(_Symbols):
         # 结构参数
         self.params = params
 
+        # 两个随井身变化的计算参数
         self._Ufe = Ufe(self)
         self._TD = TD(self)
 
-        # 替换计算参数 LR
+        # 替换计算参数 LR 中的 TD Ufe
         self.TD = self._TD.expr()
 
         self.Ufe = self._Ufe.expr()

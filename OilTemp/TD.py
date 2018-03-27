@@ -13,6 +13,7 @@ class TD(_Symbols):
         """
 
         :param temp: OilTemperature Class
+        本函数注释同 Ufe
         """
         super().__init__()
         self.temp = temp

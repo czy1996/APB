@@ -6,6 +6,7 @@ class _Symbols:
     def __init__(self):
         """
         本模块包含了所有计算温度曲线时所用到的符号
+        用于给 _OilTemp 继承，单独没有用处
         """
         self.init_symbols()
 

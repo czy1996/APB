@@ -15,8 +15,14 @@ class Ufe(_Symbols):
         :param temp: OilTemperature 类
         """
         super().__init__()
+
+        # 保存一个对 OilTemp 的引用
         self.temp = temp
+
+        # 需要 OilTemp 的井身结构参数
         self.params = temp.params
+
+        # 从井口开始的深度
         self.depth = self.params['well']['casing1']['depth'] - self.temp.Z
 
     def rules(self):
