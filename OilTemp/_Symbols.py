@@ -11,11 +11,15 @@ class _Symbols:
         self.init_symbols()
 
     def init_symbols(self):
-        # depth starting from bottom
+        # 从井底开始的高度， 用来计算井身结构
         self.Z = Symbol('Z')
-        # 井底处流体温度
-        self.T0 = Symbol('T0')
-        # 油层中部温度 摄氏度
+        # 分段计算的步长， 含义为计算点到该段井底(上一个计算点)的高度
+        self.step = Symbol('step')
+        # 该段井底温度
+        self.To = Symbol('To')
+        # 井口温度
+        self.Thead = Symbol('Thead')
+        # 该段井底地层温度
         self.Tr = Symbol('Tr')
         # kg/m3
         self.density_of_oil = Symbol('ρ')
@@ -61,7 +65,6 @@ class _Symbols:
         self.rc3i = Symbol('rc3i')
         self.rc3o = Symbol('rc3o')
         self.Kcem = Symbol('Kcem')
-        self.rcem = Symbol('rcem')
         self.tcem = Symbol('tcem')
 
         self.t = Symbol('t')

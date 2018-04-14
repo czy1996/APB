@@ -51,7 +51,6 @@ class TD(_Symbols):
             *rules,
         )
         td = self.t * self.ae / rw ** 2
-
         TD = ln(exp(-0.2 * td) +
                 (1.5 - 0.3719 * exp(-td)) * sqrt(td))
 

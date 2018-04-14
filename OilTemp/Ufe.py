@@ -81,13 +81,10 @@ class Ufe(_Symbols):
         从井底到第二层套管鞋
         :return:
         """
-        Ufe = 1 / \
-              (1 / self.h
-               + self.rti / self.Kt * ln(self.rto / self.rti)
-               + self.rti / self.Ka * ln(self.rc1i / self.rto)
-               + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-               + self.rti / self.Kcem * ln(self.rc2i / self.rc1o)
-               )
+        Ufe = 1 / (1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) + self.rti / self.Ka * ln(
+            self.rc1i / self.rto) + self.rti / self.Kc * ln(self.rc1o / self.rc1i) + self.rti / self.Kcem * ln(
+            self.rc2i / self.rc1o)
+                   )
 
         return Ufe
 
@@ -96,15 +93,10 @@ class Ufe(_Symbols):
         从第二层套管鞋到第一层 toc (油层套管 toc)
         :return:
         """
-        Ufe = 1 / \
-              (1 / self.h
-               + self.rti / self.Kt * ln(self.rto / self.rti)
-               + self.rti / self.Ka * ln(self.rc1i / self.rto)
-               + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-               + self.rti / self.Kcem * ln(self.rc2i / self.rc1o)
-               + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-               + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
-               )
+        Ufe = 1 / (1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) + self.rti / self.Ka * ln(
+            self.rc1i / self.rto) + self.rti / self.Kc * ln(self.rc1o / self.rc1i) + self.rti / self.Kcem * ln(
+            self.rc2i / self.rc1o) + self.rti / self.Kc * ln(self.rc2o / self.rc2i) + self.rti / self.Kcem * ln(
+            self.rc3i / self.rc2o))
 
         return Ufe
 
@@ -113,15 +105,11 @@ class Ufe(_Symbols):
         从第一层 toc (油层套管 toc) 到表层套管鞋
         :return:
         """
-        Ufe = 1 / \
-              (1 / self.h
-               + self.rti / self.Kt * ln(self.rto / self.rti)
-               + self.rti / self.Ka * ln(self.rc1i / self.rto)
-               + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-               + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-               + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-               + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
-               )
+        Ufe = 1 / (1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) + self.rti / self.Ka * ln(
+            self.rc1i / self.rto) + self.rti / self.Kc * ln(self.rc1o / self.rc1i) + self.rti / self.Ka * ln(
+            self.rc2i / self.rc1o) + self.rti / self.Kc * ln(self.rc2o / self.rc2i) + self.rti / self.Kcem * ln(
+            self.rc3i / self.rc2o)
+                   )
 
         return Ufe
 
@@ -130,17 +118,12 @@ class Ufe(_Symbols):
         从表层套管鞋到第二层 toc
         :return:
         """
-        Ufe = 1 / \
-              (1 / self.h
-               + self.rti / self.Kt * ln(self.rto / self.rti)
-               + self.rti / self.Ka * ln(self.rc1i / self.rto)
-               + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-               + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-               + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-               + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
-               + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-               + self.rti / self.Kcem * ln(self.tcem / self.rc3o)
-               )
+        Ufe = 1 / (1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) + self.rti / self.Ka * ln(
+            self.rc1i / self.rto) + self.rti / self.Kc * ln(self.rc1o / self.rc1i) + self.rti / self.Ka * ln(
+            self.rc2i / self.rc1o) + self.rti / self.Kc * ln(self.rc2o / self.rc2i) + self.rti / self.Kcem * ln(
+            self.rc3i / self.rc2o) + self.rti / self.Kc * ln(self.rc3o / self.rc3i) + self.rti / self.Kcem * ln(
+            self.tcem / self.rc3o)
+                   )
 
         return Ufe
 
@@ -149,17 +132,12 @@ class Ufe(_Symbols):
         从第二层他 toc 到井口
         :return:
         """
-        Ufe = 1 / \
-              (1 / self.h
-               + self.rti / self.Kt * ln(self.rto / self.rti)
-               + self.rti / self.Ka * ln(self.rc1i / self.rto)
-               + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-               + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-               + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-               + self.rti / self.Ka * ln(self.rc3i / self.rc2o)
-               + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-               + self.rti / self.Kcem * ln(self.tcem / self.rc3o)
-               )
+        Ufe = 1 / (1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) + self.rti / self.Ka * ln(
+            self.rc1i / self.rto) + self.rti / self.Kc * ln(self.rc1o / self.rc1i) + self.rti / self.Ka * ln(
+            self.rc2i / self.rc1o) + self.rti / self.Kc * ln(self.rc2o / self.rc2i) + self.rti / self.Ka * ln(
+            self.rc3i / self.rc2o) + self.rti / self.Kc * ln(self.rc3o / self.rc3i) + self.rti / self.Kcem * ln(
+            self.tcem / self.rc3o)
+                   )
 
         return Ufe
 
