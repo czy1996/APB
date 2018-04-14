@@ -56,7 +56,7 @@ class Ufe(_Symbols):
 
         Ufe_5 = (
             self.Ufe_5(),
-            self.depth > 0,
+            self.depth >= 0,
         )
 
         return [

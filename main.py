@@ -13,6 +13,7 @@ def main():
     oil_temp = OilTemp(params)
     oil_temp.load_params()
     oil_temp.run()
+    oil_temp.plot()
 
     # pprint(params)
 

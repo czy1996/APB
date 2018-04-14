@@ -35,7 +35,7 @@ class TD(_Symbols):
 
         TD_3 = (
             self.rc3o + self.tcem,
-            self.depth > 0,
+            self.depth >= 0,
         )
 
         return [

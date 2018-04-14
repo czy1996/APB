@@ -60,6 +60,7 @@ class OilTemperature(_Symbols):
         self.params['well']['casing3']['ri'] /= 0.001
         self.params['well']['tubing']['ro'] /= 0.001
         self.params['well']['tubing']['ri'] /= 0.001
+        self.params['well']['etc']['tcem'] /= 0.001
 
         self.params['thermal']['W'] = self.params['thermal']['W'] * 1000 / 24 / 3600
 
@@ -125,19 +126,29 @@ class OilTemperature(_Symbols):
     def loop(self, temps, Z):
         n = temps.shape[0]
         for i in range(1, n):
-            print(temps[i - 1], Z[i])
+            # print(temps[i - 1], Z[i])
             temps[i] = self.f(temps[i - 1], Z[i], 1)
-            print(i, temps[i])
+            # print(i, temps[i])
 
         temps = temps + 273.15
 
-        fig = plt.figure()
-        axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        axes.plot(temps, Z, 'r')
-        fig.show()
-        np.savetxt('range.txt', temps)
+        self.temps = temps
+        self.Z = Z
 
         return temps
+
+    def plot(self):
+        temps = self.temps
+        Z = self.Z
+        depth = self.params['well']['casing1']['depth']  # 井的总深度
+
+        fig = plt.figure()
+        axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        axes.set_ylim(top=0, bottom=depth)
+        axes.xaxis.tick_top()  # 将 x 坐标移到上方
+        axes.plot(temps, depth - Z, 'r')
+        fig.show()
+        np.savetxt('range.txt', temps)
 
 
 if __name__ == '__main__':
