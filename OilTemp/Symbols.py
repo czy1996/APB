@@ -1,7 +1,7 @@
 from sympy import Symbol
 
 
-class _Symbols:
+class Symbols:
 
     def __init__(self):
         """

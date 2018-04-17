@@ -1,9 +1,9 @@
 from sympy import Piecewise, ln
 
-from OilTemp._Symbols import _Symbols
+from OilTemp.Symbols import Symbols
 
 
-class Ufe(_Symbols):
+class Ufe(Symbols):
     """
     本模块用来返回 Ufe 的表达式
     表达式为一个分段函数 (Piecewise) , 与井深结构相关

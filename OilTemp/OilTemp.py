@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 
 from OilTemp.Ufe import Ufe
 from OilTemp.TD import TD
-from OilTemp._Symbols import _Symbols
+from OilTemp.Symbols import Symbols
 
 
-class OilTemperature(_Symbols):
+class OilTemperature(Symbols):
     def __init__(self, params):
         # 初始化符号
         super().__init__()

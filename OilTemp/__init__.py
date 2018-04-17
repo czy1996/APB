@@ -1,3 +1,3 @@
-from ._OilTemp import OilTemperature
+from .OilTemp import OilTemperature
 
 OilTemp = OilTemperature
