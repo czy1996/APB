@@ -33,25 +33,25 @@ class Ufe(_Symbols):
         depth_of_casing2 = self.params['well']['casing2']['depth']
         Ufe_1 = (
             self.Ufe_1(),
-            self.depth > depth_of_casing2,
+            self.depth >= depth_of_casing2,
         )
 
         toc_of_casing1 = self.params['well']['casing1']['toc']
         Ufe_2 = (
             self.Ufe_2(),
-            self.depth > toc_of_casing1,
+            self.depth >= toc_of_casing1,
         )
 
         depth_of_casing3 = self.params['well']['casing3']['depth']
         Ufe_3 = (
             self.Ufe_3(),
-            self.depth > depth_of_casing3,
+            self.depth >= depth_of_casing3,
         )
 
         toc_of_casing2 = self.params['well']['casing2']['toc']
         Ufe_4 = (
             self.Ufe_4(),
-            self.depth > toc_of_casing2,
+            self.depth >= toc_of_casing2,
         )
 
         Ufe_5 = (

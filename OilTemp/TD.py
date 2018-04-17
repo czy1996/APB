@@ -24,13 +24,13 @@ class TD(_Symbols):
         depth_of_casing2 = self.params['well']['casing2']['depth']
         TD_1 = (
             self.rc2i,
-            self.depth > depth_of_casing2,
+            self.depth >= depth_of_casing2,
         )
 
         depth_of_casing3 = self.params['well']['casing3']['depth']
         TD_2 = (
             self.rc3i,
-            self.depth > depth_of_casing3,
+            self.depth >= depth_of_casing3,
         )
 
         TD_3 = (

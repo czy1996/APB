@@ -147,6 +147,7 @@ class OilTemperature(_Symbols):
         axes.set_ylim(top=0, bottom=depth)
         axes.xaxis.tick_top()  # 将 x 坐标移到上方
         axes.plot(temps, depth - Z, 'r')
+        axes.grid()
         fig.show()
         np.savetxt('range.txt', temps)
 
