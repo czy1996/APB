@@ -53,6 +53,15 @@ class Ue(Symbols):
             Uae_5,
         ]
 
+    def exprA(self):
+        rules = self.rulesA()
+
+        expr = sp.Piecewise(
+            *rules,
+        )
+
+        return expr
+
     def _Uae_A_1(self):
         expr = 1 / (
                 self.rc1i / self.Kc * sp.ln(self.rc1o / self.rc1i) +
