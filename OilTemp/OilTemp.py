@@ -133,13 +133,13 @@ class OilTemperature(Symbols):
         temps = temps + 273.15
 
         self.temps = temps
-        self.Z = Z
+        self.Z_array = Z
 
         return temps
 
     def plot(self):
         temps = self.temps
-        Z = self.Z
+        Z = self.Z_array
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
         fig = plt.figure()
