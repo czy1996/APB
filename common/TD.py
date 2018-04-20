@@ -1,4 +1,4 @@
-from sympy import Piecewise, ln, exp, sqrt
+import sympy as sp
 
 from OilTemp.Symbols import Symbols
 
@@ -47,11 +47,11 @@ class TD(Symbols):
     def expr(self):
         rules = self.rules()
 
-        rw = Piecewise(
+        rw = sp.Piecewise(
             *rules,
         )
         td = self.t * self.ae / rw ** 2
-        TD = ln(exp(-0.2 * td) +
-                (1.5 - 0.3719 * exp(-td)) * sqrt(td))
+        TD = sp.ln(sp.exp(-0.2 * td) +
+                   (1.5 - 0.3719 * sp.exp(-td)) * sp.sqrt(td))
 
         return TD

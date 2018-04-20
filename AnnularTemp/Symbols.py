@@ -23,9 +23,14 @@ class Symbols:
         self.Ut = Symbol('Ut')  # 从油管流体到该微段环空的传热系数
         self.LR = Symbol('LR')  # 计算参数
         self.Ue = Symbol('Ue')  # 从环空到水泥环边界的传热系数
+        self.density_annular = Symbol('density')
+
+        self.step = Symbol('step')
 
         # 地温梯度
         self.m = Symbol('m')
+
+        self.Thead = Symbol('Thead')
 
         # 油管内径
         self.rti = Symbol('rti')
@@ -57,3 +62,6 @@ class Symbols:
 
         # 地层热扩散系数
         self.ae = Symbol('ae')
+
+        # 无因此地层温度
+        self.TD = Symbol('TD')

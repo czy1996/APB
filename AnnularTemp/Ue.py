@@ -24,24 +24,24 @@ class Ue(Symbols):
 
         toc_of_casing1 = self.params['well']['casing1']['toc']
         Uae_2 = (
-            self._Uae_A_1(),
+            self._Uae_A_2(),
             self.depth >= toc_of_casing1,
         )
 
         depth_of_casing3 = self.params['well']['casing3']['depth']
         Uae_3 = (
-            self._Uae_A_1(),
+            self._Uae_A_3(),
             self.depth >= depth_of_casing3,
         )
 
         toc_of_casing2 = self.params['well']['casing2']['toc']
         Uae_4 = (
-            self._Uae_A_1(),
+            self._Uae_A_4(),
             self.depth >= toc_of_casing2,
         )
 
         Uae_5 = (
-            self._Uae_A_1(),
+            self._Uae_A_5(),
             self.depth >= 0,
         )
 

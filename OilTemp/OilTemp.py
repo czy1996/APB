@@ -4,7 +4,7 @@ import json
 import matplotlib.pyplot as plt
 
 from OilTemp.Ufe import Ufe
-from OilTemp.TD import TD
+from common.TD import TD
 from OilTemp.Symbols import Symbols
 
 
@@ -52,15 +52,15 @@ class OilTemperature(Symbols):
         单位转换
         :return:
         """
-        self.params['well']['casing1']['ro'] /= 0.001
-        self.params['well']['casing1']['ri'] /= 0.001
-        self.params['well']['casing2']['ro'] /= 0.001
-        self.params['well']['casing2']['ri'] /= 0.001
-        self.params['well']['casing3']['ro'] /= 0.001
-        self.params['well']['casing3']['ri'] /= 0.001
-        self.params['well']['tubing']['ro'] /= 0.001
-        self.params['well']['tubing']['ri'] /= 0.001
-        self.params['well']['etc']['tcem'] /= 0.001
+        self.params['well']['casing1']['ro'] *= 0.001
+        self.params['well']['casing1']['ri'] *= 0.001
+        self.params['well']['casing2']['ro'] *= 0.001
+        self.params['well']['casing2']['ri'] *= 0.001
+        self.params['well']['casing3']['ro'] *= 0.001
+        self.params['well']['casing3']['ri'] *= 0.001
+        self.params['well']['tubing']['ro'] *= 0.001
+        self.params['well']['tubing']['ri'] *= 0.001
+        self.params['well']['etc']['tcem'] *= 0.001
 
         self.params['thermal']['W'] = self.params['thermal']['W'] * 1000 / 24 / 3600
 
@@ -110,7 +110,6 @@ class OilTemperature(Symbols):
         self.expr = self.expr.subs(replacements)
 
     def run(self):
-        step = 1  # 数值计算的步长
         self.f = sp.lambdify((self.To, self.Z, self.step), self.expr, ["numpy"])
 
         To0 = self.params['thermal']['temp_surface'] + self.params['thermal']['m'] * self.params['well']['casing1'][
@@ -130,16 +129,24 @@ class OilTemperature(Symbols):
             temps[i] = self.f(temps[i - 1], Z[i], 1)
             # print(i, temps[i])
 
-        temps = temps + 273.15
+        temps = temps
 
         self.temps = temps
-        self.Z_array = Z
+        self.Z_index = Z
 
         return temps
 
+    @property
+    def temps_K(self):
+        return self.temps
+
+    @property
+    def temps_C(self):
+        return self.temps + 273.15
+
     def plot(self):
-        temps = self.temps
-        Z = self.Z_array
+        temps = self.temps_C
+        Z = self.Z_index
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
         fig = plt.figure()

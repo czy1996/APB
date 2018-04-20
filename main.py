@@ -16,10 +16,8 @@ def main():
     oil_temp.run()
     # oil_temp.plot()
 
-    annular_temp = AnnularTemp(params, oil_temp.temps, oil_temp.Z_array)
-    annular_temp.init_annular_1()
-    pprint(annular_temp.expr)
-    pprint(annular_temp.Ut)
+    annular_temp = AnnularTemp(params, oil_temp.temps_K, oil_temp.Z_index)
+    annular_temp.run()
 
 
 if __name__ == '__main__':
