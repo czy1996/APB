@@ -2,11 +2,12 @@ import sympy as sp
 
 from AnnularTemp.Symbols import Symbols
 from .UeA import UeAMixin
+from .UeB import UeBMixin
 
 ln = sp.ln
 
 
-class Ue(Symbols, UeAMixin):
+class Ue(Symbols, UeAMixin, UeBMixin):
     def __init__(self, temp):
         super().__init__()
 

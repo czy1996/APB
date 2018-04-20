@@ -36,7 +36,7 @@ class AnnularTemp(Symbols):
 
         self.M = sp.pi * (self.rc1i ** 2 - self.rto ** 2) * self.step * self.density_annular
 
-        self.LR = 2 * sp.pi * (self.rc1i * self.Ue * self.Ke) / (self.Ke + self.rc1i * self.Ue * self.TD)
+        self.LR = 2 * sp.pi * (self.rc2i * self.Ue * self.Ke) / (self.Ke + self.rc2i * self.Ue * self.TD)
         self.A = (2 * sp.pi * self.rto * self.Ut * self.Tf + self.LR * self.Te) / self.M / self.CpA
         self.B = (2 * sp.pi * self.rto * self.Ut + self.LR) / self.M / self.CpA
 
@@ -94,19 +94,22 @@ class AnnularTemp(Symbols):
 
         self.expr = self.expr.subs(replacements)
 
-        self.Ue = self.Ue.subs(replacements)
-        self.Ut = self.Ut.subs(replacements)
-        self.TD = self.TD.subs(replacements)
-        self.LR = self.LR.subs(replacements)
+        # 以下是方便 debug
+        # self.Ue = self.Ue.subs(replacements)
+        # self.Ut = self.Ut.subs(replacements)
+        # self.t = self.t.subs(replacements)
+        # self.TD = self.TD.subs(replacements)
+        # self.LR = self.LR.subs(replacements)
         # self.A = self.A.subs(replacements)
         # self.B = self.B.subs(replacements)
-        self.t = self.t.subs(replacements)
-        self.T0 = self.T0.subs(replacements)
-        self.Te = self.Te.subs(replacements)
-        self.Thead = self.Thead.subs(replacements)
+        # self.T0 = self.T0.subs(replacements)
+        # self.Te = self.Te.subs(replacements)
+        # self.Thead = self.Thead.subs(replacements)
 
     def run(self):
-        self.cal_temp_A()
+        # self.cal_temp_A()
+        self.cal_temp_B()
+        self.plot()
 
     def cal_temp_A(self):
         # 环空 A 表达式
@@ -123,10 +126,25 @@ class AnnularTemp(Symbols):
         self.temps_A_zindex = self.Z_index[mask]
 
         self.temps_A = self.f(self.oil_temps, self.temps_A_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
-        self.plot()
+
+    def cal_temp_B(self):
+        # 环空 B 表达式
+        self.init_annular_2()
+
+        # 替换计算参数
+        self.load_params()
+
+        # 生成以 油温，高度，步长为参数的函数
+        self.f = sp.lambdify((self.Tf, self.Z, self.step), self.expr, ['numpy'])
+
+        # 选择环空的计算点，对于环空 B，就是所有高于油层套管的点
+        mask = self.Z_index >= self.params['well']['casing1']['depth'] - self.params['well']['casing1']['toc']
+        self.temps_B_zindex = self.Z_index[mask]
+
+        self.temps_B = self.f(self.oil_temps[mask], self.temps_B_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
 
     def plot(self):
-        temps = self.temps_A
+        # temps = self.temps_A
         Z = self.Z_index
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
@@ -134,7 +152,8 @@ class AnnularTemp(Symbols):
         axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         axes.set_ylim(top=0, bottom=depth)
         axes.xaxis.tick_top()  # 将 x 坐标移到上方
-        axes.plot(temps + 273.15, depth - Z, 'r')
+        # axes.plot(temps + 273.15, depth - Z, 'r')
         axes.plot(self.oil_temps + 273.15, depth - Z, 'g')
+        axes.plot(self.temps_B + 273.15, depth - self.temps_B_zindex, 'b')
         axes.grid()
         fig.show()
