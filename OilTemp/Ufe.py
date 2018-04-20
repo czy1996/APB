@@ -82,10 +82,11 @@ class Ufe(Symbols):
         :return:
         """
         Ufe = 1 / (
-                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti)
-                + self.rti / self.Ka * ln(self.rc1i / self.rto)
-                + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Kcem * ln(self.rc2i / self.rc1o)
+                1 / self.h +
+                self.rti / self.Kt * ln(self.rto / self.rti) +
+                self.rti / self.Ka * ln(self.rc1i / self.rto) +
+                self.rti / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rti / self.Kcem * ln(self.rc2i / self.rc1o)
         )
 
         return Ufe
@@ -96,12 +97,12 @@ class Ufe(Symbols):
         :return:
         """
         Ufe = 1 / (
-                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti)
-                + self.rti / self.Ka * ln(self.rc1i / self.rto)
-                + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Kcem * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
+                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) +
+                self.rti / self.Ka * ln(self.rc1i / self.rto) +
+                self.rti / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rti / self.Kcem * ln(self.rc2i / self.rc1o) +
+                self.rti / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
         )
 
         return Ufe
@@ -128,14 +129,14 @@ class Ufe(Symbols):
         :return:
         """
         Ufe = 1 / (
-                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti)
-                + self.rti / self.Ka * ln(self.rc1i / self.rto)
-                + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
-                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-                + self.rti / self.Kcem * ln(self.tcem / self.rc3o + 1)
+                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) +
+                self.rti / self.Ka * ln(self.rc1i / self.rto) +
+                self.rti / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rti / self.Ka * ln(self.rc2i / self.rc1o) +
+                self.rti / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rti / self.Kcem * ln(self.rc3i / self.rc2o) +
+                self.rti / self.Kc * ln(self.rc3o / self.rc3i) +
+                self.rti / self.Kcem * ln(self.tcem / self.rc3o + 1)
         )
 
         return Ufe
@@ -146,14 +147,14 @@ class Ufe(Symbols):
         :return:
         """
         Ufe = 1 / (
-                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti)
-                + self.rti / self.Ka * ln(self.rc1i / self.rto)
-                + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Ka * ln(self.rc3i / self.rc2o)
-                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-                + self.rti / self.Kcem * ln(self.tcem / self.rc3o + 1)
+                1 / self.h + self.rti / self.Kt * ln(self.rto / self.rti) +
+                self.rti / self.Ka * ln(self.rc1i / self.rto) +
+                self.rti / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rti / self.Ka * ln(self.rc2i / self.rc1o) +
+                self.rti / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rti / self.Ka * ln(self.rc3i / self.rc2o) +
+                self.rti / self.Kc * ln(self.rc3o / self.rc3i) +
+                self.rti / self.Kcem * ln(self.tcem / self.rc3o + 1)
         )
 
         return Ufe

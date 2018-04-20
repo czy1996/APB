@@ -60,44 +60,44 @@ class UeAMixin:
 
     def _Uae_A_2(self):
         expr = 1 / (
-                self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Kcem * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
+                self.rc1i / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rc1i / self.Kcem * ln(self.rc2i / self.rc1o) +
+                self.rc1i / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rc1i / self.Kcem * ln(self.rc3i / self.rc2o)
         )
 
         return expr
 
     def _Uae_A_3(self):
         expr = 1 / (
-                self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
+                self.rc1i / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rc1i / self.Ka * ln(self.rc2i / self.rc1o) +
+                self.rc1i / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rc1i / self.Kcem * ln(self.rc3i / self.rc2o)
         )
 
         return expr
 
     def _Uae_A_4(self):
         expr = 1 / (
-                + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Kcem * ln(self.rc3i / self.rc2o)
-                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-                + self.rti / self.Kcem * ln(self.tcem / self.rc3o + 1)
+                self.rc1i / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rc1i / self.Ka * ln(self.rc2i / self.rc1o) +
+                self.rc1i / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rc1i / self.Kcem * ln(self.rc3i / self.rc2o) +
+                self.rc1i / self.Kc * ln(self.rc3o / self.rc3i) +
+                self.rc1i / self.Kcem * ln(self.tcem / self.rc3o + 1)
         )
 
         return expr
 
     def _Uae_A_5(self):
         expr = 1 / (
-                + self.rti / self.Kc * ln(self.rc1o / self.rc1i)
-                + self.rti / self.Ka * ln(self.rc2i / self.rc1o)
-                + self.rti / self.Kc * ln(self.rc2o / self.rc2i)
-                + self.rti / self.Ka * ln(self.rc3i / self.rc2o)
-                + self.rti / self.Kc * ln(self.rc3o / self.rc3i)
-                + self.rti / self.Kcem * ln(self.tcem / self.rc3o + 1)
+                self.rc1i / self.Kc * ln(self.rc1o / self.rc1i) +
+                self.rc1i / self.Ka * ln(self.rc2i / self.rc1o) +
+                self.rc1i / self.Kc * ln(self.rc2o / self.rc2i) +
+                self.rc1i / self.Ka * ln(self.rc3i / self.rc2o) +
+                self.rc1i / self.Kc * ln(self.rc3o / self.rc3i) +
+                self.rc1i / self.Kcem * ln(self.tcem / self.rc3o + 1)
         )
 
         return expr
