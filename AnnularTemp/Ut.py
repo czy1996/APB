@@ -19,26 +19,29 @@ class Ut(Symbols):
 
     def UtA(self):
         expr = 1 / (
-                self.rto / self.h / self.rti + self.rto / self.Kt * sp.ln(self.rto / self.rti)
+                self.rto / self.h / self.rti +
+                self.rto / self.Kt * sp.ln(self.rto / self.rti)
         )
 
         return expr
 
     def UtB(self):
         expr = 1 / (
-                self.rto / self.h / self.rti + self.rto / self.Kt * sp.ln(self.rto / self.rti) +
-                self.rto / self.Ka * sp.ln(self.rc1i / self.rto) +
-                self.rto / self.Kc * sp.ln(self.rc1o / self.rc1i)
+                self.rc1o / self.h / self.rti +
+                self.rc1o / self.Kt * sp.ln(self.rto / self.rti) +
+                self.rc1o / self.Ka * sp.ln(self.rc1i / self.rto) +
+                self.rc1o / self.Kc * sp.ln(self.rc1o / self.rc1i)
         )
 
         return expr
 
     def UtC(self):
         expr = 1 / (
-                self.rto / self.h / self.rti + self.rto / self.Kt * sp.ln(self.rto / self.rti) +
-                self.rto / self.Ka * sp.ln(self.rc1i / self.rto) +
-                self.rto / self.Kc * sp.ln(self.rc1o / self.rc1i) +
-                self.rto / self.Ka * sp.ln(self.rc2i / self.rc1o) +
-                self.rto / self.Kc * sp.ln(self.rc2o / self.rc2i)
+                self.rc2o / self.h / self.rti +
+                self.rc2o / self.Kt * sp.ln(self.rto / self.rti) +
+                self.rc2o / self.Ka * sp.ln(self.rc1i / self.rto) +
+                self.rc2o / self.Kc * sp.ln(self.rc1o / self.rc1i) +
+                self.rc2o / self.Ka * sp.ln(self.rc2i / self.rc1o) +
+                self.rc2o / self.Kc * sp.ln(self.rc2o / self.rc2i)
         )
         return expr

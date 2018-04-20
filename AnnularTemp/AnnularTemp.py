@@ -42,6 +42,19 @@ class AnnularTemp(Symbols):
 
         self.init_main_expr()
 
+    def init_annular_2(self):
+        self.Ut = Ut(self).UtB()
+        self.Ue = Ue(self).exprB()
+        self.TD = TD(self).expr()
+
+        self.M = sp.pi * (self.rc1i ** 2 - self.rto ** 2) * self.step * self.density_annular
+
+        self.LR = 2 * sp.pi * (self.rc1i * self.Ue * self.Ke) / (self.Ke + self.rc1i * self.Ue * self.TD)
+        self.A = (2 * sp.pi * self.rto * self.Ut * self.Tf + self.LR * self.Te) / self.M / self.CpA
+        self.B = (2 * sp.pi * self.rto * self.Ut + self.LR) / self.M / self.CpA
+
+        self.init_main_expr()
+
     def load_params(self):
         """
         将 sympy 符号替换为数值参数
