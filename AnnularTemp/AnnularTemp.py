@@ -92,51 +92,24 @@ class AnnularTemp(Symbols):
         self.Te = self.Te.subs(replacements)
         self.Thead = self.Thead.subs(replacements)
 
-    def convert_params(self):
-        """
-        单位转换
-        :return:
-        """
-        self.params['well']['casing1']['ro'] *= 0.001
-        self.params['well']['casing1']['ri'] *= 0.001
-        self.params['well']['casing2']['ro'] *= 0.001
-        self.params['well']['casing2']['ri'] *= 0.001
-        self.params['well']['casing3']['ro'] *= 0.001
-        self.params['well']['casing3']['ri'] *= 0.001
-        self.params['well']['tubing']['ro'] *= 0.001
-        self.params['well']['tubing']['ri'] *= 0.001
-        self.params['well']['etc']['tcem'] *= 0.001
-
-        self.params['thermal']['W'] = self.params['thermal']['W'] * 1000 / 24 / 3600
-
-        self.params['etc']['t'] *= 24 * 3600
-
-        print('before convert r1o temp surface', self.params['well']['casing1']['ro'],
-              self.params['thermal']['temp_surface'])
-
-        self.params['thermal']['temp_surface'] -= 273.15
-
     def run(self):
+        self.cal_temp_A()
+
+    def cal_temp_A(self):
+        # 环空 A 表达式
         self.init_annular_1()
 
+        # 替换计算参数
         self.load_params()
 
-        # self.f = sp.lambdify((self.Tf, self.Z), self.expr, ['numpy'])
+        # 生产以 油温，高度，步长为参数的函数
         self.f = sp.lambdify((self.Tf, self.Z, self.step), self.expr, ['numpy'])
-        # print(self.f)
 
-        a = self.A.subs(self.Tf, self.oil_temps[0]).subs(self.Z, 0).subs(self.step, 1).subs(self.Te, self.oil_temps[0])
-        b = self.B.subs(self.Tf, self.oil_temps[0]).subs(self.Z, 0).subs(self.step, 1)
-        sp.pprint(a)
-        sp.pprint(b)
+        # 选择环空的计算点，对于环空 A，就是所有大于等于 0 的点
+        mask = self.Z_index >= 0
+        self.temps_A_zindex = self.Z_index[mask]
 
-        sp.pprint(sp.simplify(a / b))
-
-        self.temps_A = np.zeros_like(self.oil_temps)
-
-        for i, z in enumerate(self.Z_index):
-            self.temps_A[i] = self.f(self.oil_temps[i], self.Z_index[i], 1)
-            print(i, self.temps_A[i])
+        self.temps_A = self.f(self.oil_temps, self.temps_A_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
         self.plot()
 
     def plot(self):
