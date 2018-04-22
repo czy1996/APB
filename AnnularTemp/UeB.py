@@ -40,7 +40,7 @@ class UeBMixin:
     def _Uae_B_1(self):
         expr = 1 / (
                 self.rc2i / self.Kc * sp.ln(self.rc2o / self.rc2i) +
-                self.rc2i / self.Kcem * sp.ln(self.rc3i / self.rc3o)
+                self.rc2i / self.Kcem * sp.ln(self.rc3i / self.rc2o)
         )
         return expr
 
