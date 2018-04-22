@@ -1,4 +1,5 @@
 import sympy as sp
+import numpy as np
 
 from AnnularTemp.Ut import Ut
 from AnnularTemp.Ue import Ue
@@ -33,8 +34,8 @@ class AnnularTempAMixin:
 
         # 选择环空的计算点，对于环空 A，就是所有大于等于 0 的点
         # mask 是 numpy 的特殊语法，用来选择这些点
-        mask = self.Z_index >= 0
-        self._temps_A_zindex = self.Z_index[mask]
+        mask = self.zindex >= 0
+        self._temps_A_zindex = self.zindex[mask]
 
         self._temps_A = self.f(self.oil_temps, self._temps_A_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
 
@@ -60,4 +61,4 @@ class AnnularTempAMixin:
         计算点 z 坐标
         :return:
         """
-        return self.Z_index
+        return self.zindex

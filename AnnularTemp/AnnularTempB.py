@@ -36,8 +36,8 @@ class AnnularTempBMixin:
 
         # 选择环空的计算点，对于环空 B，就是所有高于油层套管 toc 的点
         # mask 是 numpy 的特殊语法，用来选择这些点
-        mask = self.Z_index >= self.params['well']['casing1']['depth'] - self.params['well']['casing1']['toc']
-        self._temps_B_zindex = self.Z_index[mask]
+        mask = self.zindex >= self.params['well']['casing1']['depth'] - self.params['well']['casing1']['toc']
+        self._temps_B_zindex = self.zindex[mask]
 
         self._temps_B = self.f(self.oil_temps[mask], self._temps_B_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
 

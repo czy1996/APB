@@ -35,8 +35,8 @@ class AnnularTempCMixin:
 
         # 选择环空的计算点，对于环空 C，就是所有高于技术套管 toc 的点
         # mask 是 numpy 的特殊语法，用来选择这些点
-        mask = self.Z_index >= self.params['well']['casing1']['depth'] - self.params['well']['casing2']['toc']
-        self._temps_C_zindex = self.Z_index[mask]
+        mask = self.zindex >= self.params['well']['casing1']['depth'] - self.params['well']['casing2']['toc']
+        self._temps_C_zindex = self.zindex[mask]
 
         self._temps_C = self.f(self.oil_temps[mask], self._temps_C_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
 
