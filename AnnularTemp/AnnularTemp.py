@@ -7,6 +7,7 @@ from AnnularTemp.Symbols import Symbols
 from AnnularTemp.AnnularTempA import AnnularTempAMixin
 from AnnularTemp.AnnularTempB import AnnularTempBMixin
 from AnnularTemp.AnnularTempC import AnnularTempCMixin
+from common import init_fig
 
 
 class AnnularTemp(Symbols,
@@ -90,17 +91,28 @@ class AnnularTemp(Symbols,
         self.cal_temp_C()
         self.plot()
 
-    def plot(self):
-        Z = self.Z_index
+    def plot(self, axes=None):
+
+        if axes is None:
+            return self._plot_new_fig()
+        else:
+            self._plot_with_axes(axes)
+
+    def _plot_with_axes(self, axes):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
-        fig = plt.figure()
-        axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        axes.set_ylim(top=0, bottom=depth)
-        axes.xaxis.tick_top()  # 将 x 坐标移到上方
-        axes.plot(self.temps_A_in_C, depth - Z, 'r')
-        axes.plot(self.oil_temps + 273.15, depth - Z, 'g')
-        axes.plot(self.temps_B_in_C, depth - self._temps_B_zindex, 'b')
-        axes.plot(self.temps_C_in_C, depth - self._temps_C_zindex, 'c')
+        axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r')
+        axes.plot(self.temps_B_in_C, depth - self.zindex_B, 'b')
+        axes.plot(self.temps_C_in_C, depth - self.zindex_C, 'c')
+
+    def _plot_new_fig(self):
+        depth = self.params['well']['casing1']['depth']  # 井的总深度
+
+        fig, axes = init_fig(depth)
+
+        axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r')
+        axes.plot(self.temps_B_in_C, depth - self.zindex_B, 'b')
+        axes.plot(self.temps_C_in_C, depth - self.zindex_C, 'c')
         axes.grid()
         fig.show()
+        return fig

@@ -40,8 +40,24 @@ class AnnularTempAMixin:
 
     @property
     def temps_A_in_C(self):
+        """
+        摄氏度
+        :return:
+        """
         return self._temps_A + 273.15
 
     @property
     def temps_A_in_K(self):
+        """
+        开氏度
+        :return:
+        """
         return self._temps_A
+
+    @property
+    def zindex_A(self):
+        """
+        计算点 z 坐标
+        :return:
+        """
+        return self.Z_index

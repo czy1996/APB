@@ -16,7 +16,7 @@ def main():
     oil_temp.run()
     # oil_temp.plot()
 
-    annular_temp = AnnularTemp(params, oil_temp.temps_K, oil_temp.Z_index)
+    annular_temp = AnnularTemp(params, oil_temp.temps_in_K, oil_temp.Z_index)
     annular_temp.run()
 
 

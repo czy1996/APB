@@ -48,3 +48,11 @@ class AnnularTempBMixin:
     @property
     def temps_B_in_K(self):
         return self._temps_B
+
+    @property
+    def zindex_B(self):
+        """
+        计算点 z 坐标
+        :return:
+        """
+        return self._temps_B_zindex

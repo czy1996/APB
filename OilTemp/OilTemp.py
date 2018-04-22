@@ -15,23 +15,15 @@ class OilTemperature(Symbols):
         # 结构参数
         self.params = params
 
-        # 两个随井身变化的计算参数
-        self._Ufe = Ufe(self)
-        self._TD = TD(self)
-
-        # 替换计算参数 LR 中的 TD Ufe
-        self.TD = self._TD.expr()
-
-        self.Ufe = self._Ufe.expr()
-
-        # pprint(self.Ufe)
-
-        self.LR = self.init_expr_LR()
-
         # 地层温度表达式
         self.init_main_expr()
 
     def init_main_expr(self):
+        # 三个个随井身变化的计算参数，顺序不能乱
+        self.TD = TD(self).expr()
+        self.Ufe = Ufe(self).expr()
+        self.LR = self.init_expr_LR()
+
         self.power_of_exp = -self.LR / (self.W * self.Cp) * self.step
         # Tz
         self.expr = (self.To - self.Tr) * sp.exp(self.power_of_exp) + (1 - sp.exp(self.power_of_exp)) * (
@@ -137,15 +129,15 @@ class OilTemperature(Symbols):
         return temps
 
     @property
-    def temps_K(self):
+    def temps_in_K(self):
         return self.temps
 
     @property
-    def temps_C(self):
+    def temps_in_C(self):
         return self.temps + 273.15
 
     def plot(self):
-        temps = self.temps_C
+        temps = self.temps_in_C
         Z = self.Z_index
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
