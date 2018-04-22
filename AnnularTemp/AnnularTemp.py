@@ -7,7 +7,7 @@ from AnnularTemp.Symbols import Symbols
 from AnnularTemp.AnnularTempA import AnnularTempAMixin
 from AnnularTemp.AnnularTempB import AnnularTempBMixin
 from AnnularTemp.AnnularTempC import AnnularTempCMixin
-from common import init_fig
+from common import init_fig_axes
 
 
 class AnnularTemp(Symbols,
@@ -108,7 +108,7 @@ class AnnularTemp(Symbols,
     def _plot_new_fig(self):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
-        fig, axes = init_fig(depth)
+        fig, axes = init_fig_axes(depth)
 
         axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r')
         axes.plot(self.temps_B_in_C, depth - self.zindex_B, 'b')
