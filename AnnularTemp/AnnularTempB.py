@@ -34,8 +34,17 @@ class AnnularTempBMixin:
         # 生成以 油温，高度，步长为参数的函数
         self.f = sp.lambdify((self.Tf, self.Z, self.step), self.expr, ['numpy'])
 
-        # 选择环空的计算点，对于环空 B，就是所有高于油层套管的点
+        # 选择环空的计算点，对于环空 B，就是所有高于油层套管 toc 的点
+        # mask 是 numpy 的特殊语法，用来选择这些点
         mask = self.Z_index >= self.params['well']['casing1']['depth'] - self.params['well']['casing1']['toc']
-        self.temps_B_zindex = self.Z_index[mask]
+        self._temps_B_zindex = self.Z_index[mask]
 
-        self.temps_B = self.f(self.oil_temps[mask], self.temps_B_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
+        self._temps_B = self.f(self.oil_temps[mask], self._temps_B_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
+
+    @property
+    def temps_B_in_C(self):
+        return self._temps_B + 273.15
+
+    @property
+    def temps_B_in_K(self):
+        return self._temps_B

@@ -28,10 +28,20 @@ class AnnularTempAMixin:
         self.load_params()
 
         # 生产以 油温，高度，步长为参数的函数
+        # 传递给 numpy 计算
         self.f = sp.lambdify((self.Tf, self.Z, self.step), self.expr, ['numpy'])
 
         # 选择环空的计算点，对于环空 A，就是所有大于等于 0 的点
+        # mask 是 numpy 的特殊语法，用来选择这些点
         mask = self.Z_index >= 0
-        self.temps_A_zindex = self.Z_index[mask]
+        self._temps_A_zindex = self.Z_index[mask]
 
-        self.temps_A = self.f(self.oil_temps, self.temps_A_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
+        self._temps_A = self.f(self.oil_temps, self._temps_A_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
+
+    @property
+    def temps_A_in_C(self):
+        return self._temps_A + 273.15
+
+    @property
+    def temps_A_in_K(self):
+        return self._temps_A
