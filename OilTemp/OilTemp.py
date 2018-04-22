@@ -4,8 +4,9 @@ import json
 import matplotlib.pyplot as plt
 
 from OilTemp.Ufe import Ufe
-from common.TD import TD
 from OilTemp.Symbols import Symbols
+from common.TD import TD
+from common import init_fig_axes
 
 
 class OilTemperature(Symbols):
@@ -136,19 +137,30 @@ class OilTemperature(Symbols):
     def temps_in_C(self):
         return self.temps + 273.15
 
-    def plot(self):
-        temps = self.temps_in_C
-        Z = self.Z_index
+    @property
+    def temps_earth_in_C(self):
+        return None
+
+    def _plot_new_fig(self):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
-        fig = plt.figure()
-        axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        axes.set_ylim(top=0, bottom=depth)
-        axes.xaxis.tick_top()  # 将 x 坐标移到上方
-        axes.plot(temps, depth - Z, 'r')
-        axes.grid()
+        fig, axes = init_fig_axes(depth)
+        self._plot_with_axes(axes)
+        # axes.plot(temps, depth - Z, 'y')
         fig.show()
-        np.savetxt('range.txt', temps)
+
+    def _plot_with_axes(self, axes):
+        depth = self.params['well']['casing1']['depth']  # 井的总深度
+
+        temps = self.temps_in_C
+        Z = self.Z_index
+        axes.plot(temps, depth - Z, 'g')
+
+    def plot(self, axes=None):
+        if axes is None:
+            self._plot_new_fig()
+        else:
+            self._plot_with_axes(axes)
 
 
 if __name__ == '__main__':

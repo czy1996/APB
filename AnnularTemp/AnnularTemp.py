@@ -1,7 +1,7 @@
 import sympy as sp
 import numpy as np
 
-from matplotlib import pyplot as plt
+from matplotlib.axes import Axes
 
 from AnnularTemp.Symbols import Symbols
 from AnnularTemp.AnnularTempA import AnnularTempAMixin
@@ -89,7 +89,7 @@ class AnnularTemp(Symbols,
         self.cal_temp_A()
         self.cal_temp_B()
         self.cal_temp_C()
-        self.plot()
+        # self.plot()
 
     def plot(self, axes=None):
 
@@ -98,7 +98,7 @@ class AnnularTemp(Symbols,
         else:
             self._plot_with_axes(axes)
 
-    def _plot_with_axes(self, axes):
+    def _plot_with_axes(self, axes: Axes):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
         axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r')
@@ -110,9 +110,6 @@ class AnnularTemp(Symbols,
 
         fig, axes = init_fig_axes(depth)
 
-        axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r')
-        axes.plot(self.temps_B_in_C, depth - self.zindex_B, 'b')
-        axes.plot(self.temps_C_in_C, depth - self.zindex_C, 'c')
-        axes.grid()
+        self._plot_with_axes(axes)
         fig.show()
         return fig
