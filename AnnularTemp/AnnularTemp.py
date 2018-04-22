@@ -120,8 +120,8 @@ class AnnularTemp(Symbols):
         # self.Thead = self.Thead.subs(replacements)
 
     def run(self):
-        # self.cal_temp_A()
-        # self.cal_temp_B()
+        self.cal_temp_A()
+        self.cal_temp_B()
         self.cal_temp_C()
         self.plot()
 
@@ -175,7 +175,7 @@ class AnnularTemp(Symbols):
         self.temps_C = self.f(self.oil_temps[mask], self.temps_C_zindex, 1)  # 步长暂时设置为 1 ，貌似没有影响
 
     def plot(self):
-        # temps = self.temps_A
+        temps = self.temps_A
         Z = self.Z_index
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
@@ -183,8 +183,9 @@ class AnnularTemp(Symbols):
         axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         axes.set_ylim(top=0, bottom=depth)
         axes.xaxis.tick_top()  # 将 x 坐标移到上方
-        # axes.plot(temps + 273.15, depth - Z, 'r')
+        axes.plot(self.temps_A + 273.15, depth - Z, 'r')
         axes.plot(self.oil_temps + 273.15, depth - Z, 'g')
         axes.plot(self.temps_C + 273.15, depth - self.temps_C_zindex, 'b')
+        axes.plot(self.temps_B + 273.15, depth - self.temps_B_zindex, 'c')
         axes.grid()
         fig.show()
