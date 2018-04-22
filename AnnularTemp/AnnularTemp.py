@@ -15,7 +15,7 @@ class AnnularTemp(Symbols,
                   AnnularTempBMixin,
                   AnnularTempCMixin,
                   ):
-    def __init__(self, params, oil_temps: np.ndarray, Z_index: np.ndarray):
+    def __init__(self, params, oil_temps: np.ndarray, zindex: np.ndarray):
         # 初始化符号
         super().__init__()
         # 结构参数
@@ -24,7 +24,7 @@ class AnnularTemp(Symbols,
         self.init_main_expr()
 
         self.oil_temps = oil_temps
-        self.Z_index = Z_index
+        self.zindex = zindex
 
     def init_main_expr(self):
         """

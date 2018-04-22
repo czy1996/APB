@@ -111,23 +111,23 @@ class OilTemperature(Symbols):
             'depth']
 
         depth = self.params['well']['casing1']['depth']  # 井的总深度
-        Z = np.arange(0, int(depth), 1, dtype=float)
-        temps = np.zeros_like(Z, dtype=float)
+        zindex = np.arange(0, int(depth), 1, dtype=float)  # 计算点坐标
+        temps = np.zeros_like(zindex, dtype=float)
         temps[0] = To0
 
         f_temps_earth = sp.lambdify(self.Z, self.Tr, "numpy")
-        self._temps_earth = f_temps_earth(Z)
-        self.loop(temps, Z)
+        self._temps_earth = f_temps_earth(zindex)
+        self.loop(temps, zindex)
 
-    def loop(self, temps, Z):
+    def loop(self, temps, zindex):
         n = temps.shape[0]
         for i in range(1, n):
-            # print(_temps[i - 1], Z[i])
-            temps[i] = self.f(temps[i - 1], Z[i], 1)
+            # print(_temps[i - 1], zindex[i])
+            temps[i] = self.f(temps[i - 1], zindex[i], 1)
             # print(i, _temps[i])
 
         self._temps = temps
-        self.Z_index = Z
+        self.zindex = zindex
 
         return temps
 
@@ -155,7 +155,7 @@ class OilTemperature(Symbols):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
         temps = self.temps_in_C
-        Z = self.Z_index
+        Z = self.zindex
         axes.plot(temps, depth - Z, 'g')
         axes.plot(self.temps_earth_in_C, depth - Z, 'y')
 
