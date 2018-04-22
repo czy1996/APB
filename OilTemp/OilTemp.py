@@ -100,9 +100,11 @@ class OilTemperature(Symbols):
             (self.t, self.params['etc']['t']),
         ]
 
+        self.Tr = self.Tr.subs(replacements)
         self.expr = self.expr.subs(replacements)
 
     def run(self):
+        # 将表达式转换为 numpy 能够计算的函数
         self.f = sp.lambdify((self.To, self.Z, self.step), self.expr, ["numpy"])
 
         To0 = self.params['thermal']['temp_surface'] + self.params['thermal']['m'] * self.params['well']['casing1'][
@@ -113,40 +115,40 @@ class OilTemperature(Symbols):
         temps = np.zeros_like(Z, dtype=float)
         temps[0] = To0
 
-        print(self.loop(temps, Z))
+        f_temps_earth = sp.lambdify(self.Z, self.Tr, "numpy")
+        self._temps_earth = f_temps_earth(Z)
+        self.loop(temps, Z)
 
     def loop(self, temps, Z):
         n = temps.shape[0]
         for i in range(1, n):
-            # print(temps[i - 1], Z[i])
+            # print(_temps[i - 1], Z[i])
             temps[i] = self.f(temps[i - 1], Z[i], 1)
-            # print(i, temps[i])
+            # print(i, _temps[i])
 
-        temps = temps
-
-        self.temps = temps
+        self._temps = temps
         self.Z_index = Z
 
         return temps
 
     @property
     def temps_in_K(self):
-        return self.temps
+        return self._temps
 
     @property
     def temps_in_C(self):
-        return self.temps + 273.15
+        return self._temps + 273.15
 
     @property
     def temps_earth_in_C(self):
-        return None
+        return self._temps_earth + 273.15
 
     def _plot_new_fig(self):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
         fig, axes = init_fig_axes(depth)
         self._plot_with_axes(axes)
-        # axes.plot(temps, depth - Z, 'y')
+        # axes.plot(_temps, depth - Z, 'y')
         fig.show()
 
     def _plot_with_axes(self, axes):
@@ -155,6 +157,7 @@ class OilTemperature(Symbols):
         temps = self.temps_in_C
         Z = self.Z_index
         axes.plot(temps, depth - Z, 'g')
+        axes.plot(self.temps_earth_in_C, depth - Z, 'y')
 
     def plot(self, axes=None):
         if axes is None:
