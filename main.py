@@ -5,6 +5,7 @@ from common import init_fig_axes
 from sympy import init_printing, latex, pprint
 import json
 import pandas as pd
+import numpy as np
 
 
 def plot(oil_temp: OilTemp, annular_temp: AnnularTemp):
@@ -38,6 +39,7 @@ def export_to_excel(oil_temp: OilTemp, annular_temp: AnnularTemp):
     for sheet_name, array in data.items():
         df = pd.DataFrame({
             '深度': depth - zindex[sheet_name],
+            '地温': oil_temp.temps_earth_in_C[-array.shape[0]:],
             sheet_name: array,
         })
         df.to_excel(writer,
