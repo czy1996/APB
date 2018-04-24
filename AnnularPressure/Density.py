@@ -4,6 +4,7 @@ import numpy as np
 class Density:
     def __init__(self):
         self._density = None
+        self.default_filename = 'density.npy'
 
         # 温度和压力取值范围
         self.max_temp = 200
@@ -17,11 +18,23 @@ class Density:
             for j in range(len_pressure):
                 self._density[i][j] = self._density_of_water(i, j)
 
+    def _save(self):
+        np.save(self.default_filename, self._density)
+
+    def _load(self):
+        try:
+            self._density = np.load(self.default_filename)
+        except FileNotFoundError:
+            print("Density File Not Found, Cal Now")
+            self._density = None
+
     def get(self, temp, pressure):
-        _density = self._density
-        if _density is None:
+        self._load()
+
+        if self._density is None:
             self._run()
-        return _density[temp][pressure]
+            self._save()
+        return self._density[temp][pressure]
 
     def _density_data_points(self):
         """
@@ -38,11 +51,13 @@ class Density:
             [890.39, 943.51],
         ])
 
+    @property
     def _temp_data_array(self):
         return np.ma.array([
             7, 27, 47, 67, 87, 127, 177,
         ])
 
+    @property
     def _pressure_array(self):
         return np.ma.array([
             1, 100,
@@ -55,11 +70,17 @@ class Density:
         :param T:
         :return:
         """
-        temp = self._temp_data_array()
+        temp = self._temp_data_array
         ti = temp[i]
         temp[i] = np.ma.masked  # 第 i 个 不参与计算
         _prod_ele = (T - temp) / (ti - temp)
         return np.prod(_prod_ele)
+
+    def _li_T_array(self, T):
+        a = np.empty_like(self._temp_data_array)
+        for i in range(len(a)):
+            a[i] = self._li_T(i, T)
+        return a
 
     def _lj_P(self, j, P):
         """
@@ -69,7 +90,7 @@ class Density:
         :return:
         TODO 利用广播提高效率？
         """
-        pressure = self._pressure_array()
+        pressure = self._pressure_array
         pj = pressure[j]
         pressure[j] = np.ma.masked
         _prod_ele = (P - pressure) / (pj - pressure)
@@ -78,8 +99,8 @@ class Density:
     def _density_of_water(self, temp, pressure):
         print('_density of water', temp, pressure)
         _density = self._density_data_points()
-        _temp = self._temp_data_array()
-        _pressure = self._pressure_array()
+        _temp = self._temp_data_array
+        _pressure = self._pressure_array
         r = 0
         for i in range(len(_temp)):
             for j in range(len(_pressure)):
@@ -91,5 +112,5 @@ class Density:
 def test():
     density = Density()
     t = density._density_of_water(177, 10)
-    t = density.get(177, 10)
+    t = density.get(150, 10)
     print(t)
