@@ -108,9 +108,30 @@ class Density:
 
         return r
 
+    def _der_density_over_der_temp(self, temp, pressure):
+        dt = 1
+        if temp + 1 <= self.max_temp:
+            return self.get(temp + 1, pressure) - self.get(temp, pressure)
+        else:
+            return self.get(temp, pressure) - self.get(temp - 1, pressure)
+
+    def _der_density_over_der_pressure(self, temp, pressure):
+        if pressure + 1 <= self.max_temp:
+            return self.get(temp, pressure + 1) - self.get(temp, pressure)
+        else:
+            return self.get(temp, pressure) - self.get(temp, pressure - 1)
+
+    def alpha(self, temp, pressure):
+        return -(1 / self.get(temp, pressure)) * self._der_density_over_der_temp(temp, pressure)
+
+    def k(self, temp, pressure):
+        return 1 / self.get(temp, pressure) * self._der_density_over_der_pressure(temp, pressure)
+
 
 def test():
     density = Density()
     t = density._density_of_water(177, 10)
     t = density.get(150, 10)
     print(t)
+    print(density._der_density_over_der_pressure(156, 10))
+    print(density._der_density_over_der_temp(156, 10))
