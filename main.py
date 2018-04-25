@@ -1,6 +1,7 @@
 from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
 from common import init_fig_axes
+from AnnularPressure.Pressure import Pressure
 
 from sympy import init_printing, latex, pprint
 import json
@@ -61,6 +62,10 @@ def main():
 
     annular_temp = AnnularTemp(params, oil_temp.temps_in_K, oil_temp.zindex)
     annular_temp.run()
+    annular_temp.plot()
+
+    pressure = Pressure(params, annular_temp.temps_C_in_C, annular_temp.zindex_C)
+    print('delta p', pressure.delta_p())
 
     # plot(oil_temp, annular_temp)
     export_to_excel(oil_temp, annular_temp)

@@ -16,7 +16,7 @@ class Density:
         self._density = np.empty((len_temp, len_pressure), dtype=float)
         for i in range(len_temp):
             for j in range(len_pressure):
-                self._density[i][j] = self._density_of_water(i, j)
+                self._density[i, j] = self._density_of_water(i, j)
 
     def _save(self):
         np.save(self.default_filename, self._density)
@@ -28,13 +28,33 @@ class Density:
             print("Density File Not Found, Cal Now")
             self._density = None
 
-    def get(self, temp, pressure):
+    def _cached_get(self, temp, pressure):
         self._load()
 
         if self._density is None:
             self._run()
             self._save()
-        return self._density[temp][pressure]
+        if isinstance(temp, np.ndarray):
+            pass
+        # print(temp)
+        # print(pressure)
+        # print('temp < 201', (temp < 201).all(), (temp < 201).any())
+        return self._density[temp, pressure]
+
+    def _real_time_get(self, temp, pressure):
+        r = np.empty_like(temp)
+        if isinstance(temp, np.ndarray) and isinstance(pressure, np.ndarray):
+            for i, t in np.ndenumerate(temp):
+                r[i] = self._density_of_water(t, pressure[i])
+            return r
+        else:
+            return self._density_of_water(temp, pressure)
+
+    def get(self, temp, pressure):
+        print('density', temp, pressure)
+        d = self._cached_get(temp, pressure)
+        # d = self._real_time_get(temp, pressure)
+        return d
 
     def _density_data_points(self):
         """
@@ -102,21 +122,25 @@ class Density:
         _temp = self._temp_data_array
         _pressure = self._pressure_array
         r = 0
-        for i in range(len(_temp)):
-            for j in range(len(_pressure)):
-                r += _density[i][j] * self._li_T(i, temp) * self._lj_P(j, pressure)
+        # for i in range(len(_temp)):
+        #     for j in range(len(_pressure)):
+        #         r += _density[i][j] * self._li_T(i, temp) * self._lj_P(j, pressure)
+
+        for (i, j), d in np.ndenumerate(_density):
+            r += d * self._li_T(i, temp) * self._lj_P(j, pressure)
 
         return r
 
     def _der_density_over_der_temp(self, temp, pressure):
         dt = 1
-        if temp + 1 <= self.max_temp:
+        if (temp + 1 <= self.max_temp).any():
+            # print('in _der temp', temp + 1)
             return self.get(temp + 1, pressure) - self.get(temp, pressure)
         else:
             return self.get(temp, pressure) - self.get(temp - 1, pressure)
 
     def _der_density_over_der_pressure(self, temp, pressure):
-        if pressure + 1 <= self.max_temp:
+        if (pressure + 1 <= self.max_temp).any():
             return self.get(temp, pressure + 1) - self.get(temp, pressure)
         else:
             return self.get(temp, pressure) - self.get(temp, pressure - 1)
