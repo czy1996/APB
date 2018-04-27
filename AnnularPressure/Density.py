@@ -51,7 +51,7 @@ class Density:
             return self._density_of_water(temp, pressure)
 
     def get(self, temp, pressure):
-        print('density', temp, pressure)
+        # print('density', temp, pressure)
         d = self._cached_get(temp, pressure)
         # d = self._real_time_get(temp, pressure)
         return d

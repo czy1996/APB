@@ -68,7 +68,7 @@ class OilTemperature(Symbols):
         """
         # 从井口开始的深度
 
-        self.convert_params()
+        # self.convert_params()
 
         self.depth = self.params['well']['casing1']['depth'] - self.Z
 

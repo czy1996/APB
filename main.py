@@ -2,6 +2,7 @@ from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
 from common import init_fig_axes
 from AnnularPressure.Pressure import Pressure
+from Params import Params
 
 from sympy import init_printing, latex, pprint
 import json
@@ -52,13 +53,14 @@ def export_to_excel(oil_temp: OilTemp, annular_temp: AnnularTemp):
 def main():
     init_printing(use_unicode=True)
 
-    with open('data.json', 'r') as f:
-        params = json.load(f)
+    model = Params()
+
+    params = model.params
 
     oil_temp = OilTemp(params)
     oil_temp.load_params()
     oil_temp.run()
-    # oil_temp.plot()
+    oil_temp.plot()
 
     annular_temp = AnnularTemp(params, oil_temp.temps_in_K, oil_temp.zindex)
     annular_temp.run()

@@ -47,7 +47,7 @@ class Pressure:
         while (_temps < self.temps).all():
             # 循环的终止条件是某个微段的温度达到了环空温度
             # 条件的语法 .all() 用了 numpy 的一个特性，意思是对于每一个数组元素 _temps  < self.temps
-            print('temps', _temps)
+            # print('temps', _temps)
             dp = self._delta_p(dt, _temps, _pressure_int)
 
             # 在地层温度和环空温度之间取值
@@ -60,9 +60,9 @@ class Pressure:
 
             # 把它转成整数，这是为了算密度
             _pressure_int = float_to_int(_pressure_float)
-            print('dp', dp)
+            # print('dp', dp)
 
-        return _pressure_float - self.liquid_pressure
+        return (_pressure_float - self.liquid_pressure)[0]
 
     def _delta_p(self, dt, temp, pressure):
         _p = (np.sum(dt * self._density.alpha(temp, pressure)) /
