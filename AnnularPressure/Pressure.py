@@ -45,7 +45,8 @@ class Pressure:
         _pressure_int = self.liquid_pressure.copy()
         _pressure_float = _pressure_int.astype(np.float32)
         while (_temps < self.temps).all():
-            # 循环的终止条件是某个微端的温度达到了环空温度
+            # 循环的终止条件是某个微段的温度达到了环空温度
+            # 条件的语法 .all() 用了 numpy 的一个特性，意思是对于每一个数组元素 _temps  < self.temps
             print('temps', _temps)
             dp = self._delta_p(dt, _temps, _pressure_int)
 
@@ -53,11 +54,14 @@ class Pressure:
             _temps = self.temps_earth * (1 - coefficient) + self.temps * coefficient
             _temps = float_to_int(_temps)
             coefficient += step  # 增加 0.01
+
+            # 这是实际的计算结果
             _pressure_float += dp
+
+            # 把它转成整数，这是为了算密度
             _pressure_int = float_to_int(_pressure_float)
             print('dp', dp)
 
-        b = _temps < self.temps
         return _pressure_float - self.liquid_pressure
 
     def _delta_p(self, dt, temp, pressure):
