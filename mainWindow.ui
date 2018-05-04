@@ -20,375 +20,403 @@
    <string>APB计算器</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>540</width>
-      <height>474</height>
+      <width>131</width>
+      <height>120</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="0">
-      <layout class="QVBoxLayout" name="well_etc">
-       <item>
-        <widget class="QLabel" name="label_13">
-         <property name="text">
-          <string>其他</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QFormLayout" name="formLayout_4">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_14">
-           <property name="text">
-            <string>外层水泥环厚度 mm</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_10"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="dLabel">
-           <property name="text">
-            <string>生产时间 d</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="dLineEdit"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="0" column="0">
-      <layout class="QVBoxLayout" name="Casing1">
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>油层套管</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QFormLayout" name="formLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>深度 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>外径 in</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEdit_2"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>内径 in</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_3"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="Label">
-           <property name="text">
-            <string>水泥返高 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="LineEdit"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="0" column="1" rowspan="4">
-      <layout class="QVBoxLayout" name="thermal">
-       <item>
-        <widget class="QLabel" name="label_15">
-         <property name="text">
-          <string>热力学参数</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QFormLayout" name="formLayout_5">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_16">
-           <property name="text">
-            <string>地温梯度 ℃/m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_11"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="tDLabel">
-           <property name="text">
-            <string>流量 t/d</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="tDLineEdit"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="jKgLLabel">
-           <property name="text">
-            <string>产液比热容 J/(kg*L)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="jKgLLineEdit"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="jKgKLabel">
-           <property name="text">
-            <string>环空液体比热容 J/(kg*K)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="jKgKLineEdit"/>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="wM2KLabel">
-           <property name="text">
-            <string>对流换热系数 W(m2*K)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="wM2KLineEdit"/>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="wMKLabel">
-           <property name="text">
-            <string>套管导热系数 W/(m*K)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="wMKLineEdit"/>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="wMKLabel_2">
-           <property name="text">
-            <string>油管导热系数 W(m*K)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLineEdit" name="wMKLineEdit_2"/>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLabel" name="wMKLabel_3">
-           <property name="text">
-            <string>环空液体导热系数 W/(m*K)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="1">
-          <widget class="QLineEdit" name="wMKLineEdit_3"/>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="wMKLabel_4">
-           <property name="text">
-            <string>水泥环导热系数 W/(m*K)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="1">
-          <widget class="QLineEdit" name="wMKLineEdit_4"/>
-         </item>
-         <item row="9" column="0">
-          <widget class="QLabel" name="kgM3Label">
-           <property name="text">
-            <string>产液密度 kg/m3</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="1">
-          <widget class="QLineEdit" name="kgM3LineEdit"/>
-         </item>
-         <item row="10" column="0">
-          <widget class="QLabel" name="kgM3Label_2">
-           <property name="text">
-            <string>环空液体密度 kg/m3</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <widget class="QLineEdit" name="kgM3LineEdit_2"/>
-         </item>
-         <item row="11" column="0">
-          <widget class="QLabel" name="m2SLabel">
-           <property name="text">
-            <string>地层热扩散系数 m2/s</string>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="1">
-          <widget class="QLineEdit" name="m2SLineEdit"/>
-         </item>
-         <item row="12" column="0">
-          <widget class="QLabel" name="Label_4">
-           <property name="text">
-            <string>井口温度 ℃</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="1">
-          <widget class="QLineEdit" name="LineEdit_4"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="0">
-      <layout class="QVBoxLayout" name="Casing2">
-       <item>
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>技术套管</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QFormLayout" name="formLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>深度 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_4"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_7">
-           <property name="text">
-            <string>外径 in</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEdit_5"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>内径 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_6"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="Label_2">
-           <property name="text">
-            <string>水泥返高 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="LineEdit_2"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="0">
-      <layout class="QVBoxLayout" name="Casing3">
-       <item>
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>表层套管</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QFormLayout" name="formLayout_3">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_10">
-           <property name="text">
-            <string>深度 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_7"/>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEdit_8"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>外径 in</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_9"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>内径 in</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="Label_3">
-           <property name="text">
-            <string>水泥返高 m</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="LineEdit_3"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="0">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+    <layout class="QVBoxLayout" name="Casing1">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>油层套管</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>深度 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="input_depth1"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>外径 in</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="input_dc1o"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>内径 in</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_3"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="Label">
+         <property name="text">
+          <string>水泥返高 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="LineEdit"/>
+       </item>
+      </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>135</y>
+      <width>131</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="Casing2">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>技术套管</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>深度 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_4"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>外径 in</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_5"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>内径 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_6"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="Label_2">
+         <property name="text">
+          <string>水泥返高 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="LineEdit_2"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>261</y>
+      <width>131</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="Casing3">
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>表层套管</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>深度 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_7"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_8"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>外径 in</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_9"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>内径 in</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="Label_3">
+         <property name="text">
+          <string>水泥返高 m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="LineEdit_3"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>131</width>
+      <height>68</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="well_etc">
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>其他</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>外层水泥环厚度 mm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_10"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="dLabel">
+         <property name="text">
+          <string>生产时间 d</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="dLineEdit"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>10</y>
+      <width>221</width>
+      <height>354</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="thermal">
+     <item>
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>热力学参数</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout_5">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>地温梯度 ℃/m</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_11"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="tDLabel">
+         <property name="text">
+          <string>流量 t/d</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="tDLineEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="jKgLLabel">
+         <property name="text">
+          <string>产液比热容 J/(kg*L)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="jKgLLineEdit"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="jKgKLabel">
+         <property name="text">
+          <string>环空液体比热容 J/(kg*K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="jKgKLineEdit"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="wM2KLabel">
+         <property name="text">
+          <string>对流换热系数 W(m2*K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="wM2KLineEdit"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="wMKLabel">
+         <property name="text">
+          <string>套管导热系数 W/(m*K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="wMKLineEdit"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="wMKLabel_2">
+         <property name="text">
+          <string>油管导热系数 W(m*K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="wMKLineEdit_2"/>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="wMKLabel_3">
+         <property name="text">
+          <string>环空液体导热系数 W/(m*K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLineEdit" name="wMKLineEdit_3"/>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="wMKLabel_4">
+         <property name="text">
+          <string>水泥环导热系数 W/(m*K)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QLineEdit" name="wMKLineEdit_4"/>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="kgM3Label">
+         <property name="text">
+          <string>产液密度 kg/m3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QLineEdit" name="kgM3LineEdit"/>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="kgM3Label_2">
+         <property name="text">
+          <string>环空液体密度 kg/m3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1">
+        <widget class="QLineEdit" name="kgM3LineEdit_2"/>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="m2SLabel">
+         <property name="text">
+          <string>地层热扩散系数 m2/s</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QLineEdit" name="m2SLineEdit"/>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="Label_4">
+         <property name="text">
+          <string>井口温度 ℃</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QLineEdit" name="LineEdit_4"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>380</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>运行</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
