@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>843</width>
-    <height>535</height>
+    <height>572</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -52,7 +52,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>外径 in</string>
+          <string>外径 mm</string>
          </property>
         </widget>
        </item>
@@ -62,12 +62,12 @@
        <item row="2" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>内径 in</string>
+          <string>内径 mm</string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="input_dc1i"/>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="Label">
@@ -77,7 +77,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="LineEdit"/>
+        <widget class="QLineEdit" name="input_toc1"/>
        </item>
       </layout>
      </item>
@@ -110,27 +110,27 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_4"/>
+        <widget class="QLineEdit" name="input_depth2"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>外径 in</string>
+          <string>外径 mm</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="QLineEdit" name="input_dc2o"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>内径 m</string>
+          <string>内径 mm</string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_6"/>
+        <widget class="QLineEdit" name="input_dc2i"/>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="Label_2">
@@ -140,7 +140,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="LineEdit_2"/>
+        <widget class="QLineEdit" name="input_toc2"/>
        </item>
       </layout>
      </item>
@@ -173,25 +173,25 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_7"/>
+        <widget class="QLineEdit" name="input_depth3"/>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_8"/>
+        <widget class="QLineEdit" name="input_dc3o"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_11">
          <property name="text">
-          <string>外径 in</string>
+          <string>外径 mm</string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_9"/>
+        <widget class="QLineEdit" name="input_dc3i"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_12">
          <property name="text">
-          <string>内径 in</string>
+          <string>内径 mm</string>
          </property>
         </widget>
        </item>
@@ -203,7 +203,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="LineEdit_3"/>
+        <widget class="QLineEdit" name="input_toc3"/>
        </item>
       </layout>
      </item>
@@ -212,9 +212,9 @@
    <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>390</y>
-      <width>131</width>
+      <x>150</x>
+      <y>380</y>
+      <width>221</width>
       <height>68</height>
      </rect>
     </property>
@@ -236,7 +236,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_10"/>
+        <widget class="QLineEdit" name="input_tcem"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="dLabel">
@@ -246,7 +246,7 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="dLineEdit"/>
+        <widget class="QLineEdit" name="input_t"/>
        </item>
       </layout>
      </item>
@@ -279,7 +279,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_11"/>
+        <widget class="QLineEdit" name="input_m"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="tDLabel">
@@ -289,7 +289,7 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="tDLineEdit"/>
+        <widget class="QLineEdit" name="input_W"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="jKgLLabel">
@@ -299,7 +299,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="jKgLLineEdit"/>
+        <widget class="QLineEdit" name="input_cp_oil"/>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="jKgKLabel">
@@ -309,7 +309,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="jKgKLineEdit"/>
+        <widget class="QLineEdit" name="input_cp_annular"/>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="wM2KLabel">
@@ -319,7 +319,7 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="wM2KLineEdit"/>
+        <widget class="QLineEdit" name="input_h"/>
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="wMKLabel">
@@ -329,7 +329,7 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QLineEdit" name="wMKLineEdit"/>
+        <widget class="QLineEdit" name="input_Kc"/>
        </item>
        <item row="6" column="0">
         <widget class="QLabel" name="wMKLabel_2">
@@ -339,7 +339,7 @@
         </widget>
        </item>
        <item row="6" column="1">
-        <widget class="QLineEdit" name="wMKLineEdit_2"/>
+        <widget class="QLineEdit" name="input_Kt"/>
        </item>
        <item row="7" column="0">
         <widget class="QLabel" name="wMKLabel_3">
@@ -349,7 +349,7 @@
         </widget>
        </item>
        <item row="7" column="1">
-        <widget class="QLineEdit" name="wMKLineEdit_3"/>
+        <widget class="QLineEdit" name="input_Ka"/>
        </item>
        <item row="8" column="0">
         <widget class="QLabel" name="wMKLabel_4">
@@ -359,7 +359,7 @@
         </widget>
        </item>
        <item row="8" column="1">
-        <widget class="QLineEdit" name="wMKLineEdit_4"/>
+        <widget class="QLineEdit" name="input_Kcem"/>
        </item>
        <item row="9" column="0">
         <widget class="QLabel" name="kgM3Label">
@@ -369,7 +369,7 @@
         </widget>
        </item>
        <item row="9" column="1">
-        <widget class="QLineEdit" name="kgM3LineEdit"/>
+        <widget class="QLineEdit" name="input_density_oil"/>
        </item>
        <item row="10" column="0">
         <widget class="QLabel" name="kgM3Label_2">
@@ -379,7 +379,7 @@
         </widget>
        </item>
        <item row="10" column="1">
-        <widget class="QLineEdit" name="kgM3LineEdit_2"/>
+        <widget class="QLineEdit" name="input_density_annular"/>
        </item>
        <item row="11" column="0">
         <widget class="QLabel" name="m2SLabel">
@@ -389,7 +389,7 @@
         </widget>
        </item>
        <item row="11" column="1">
-        <widget class="QLineEdit" name="m2SLineEdit"/>
+        <widget class="QLineEdit" name="input_ae"/>
        </item>
        <item row="12" column="0">
         <widget class="QLabel" name="Label_4">
@@ -399,17 +399,17 @@
         </widget>
        </item>
        <item row="12" column="1">
-        <widget class="QLineEdit" name="LineEdit_4"/>
+        <widget class="QLineEdit" name="input_temp_surface"/>
        </item>
       </layout>
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="buttonRun">
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>380</y>
+      <y>460</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -417,6 +417,49 @@
     <property name="text">
      <string>运行</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>131</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="Tubing">
+     <item>
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>油管</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout_6">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>外径 mm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="input_dto"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>内径 mm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="input_dti"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
