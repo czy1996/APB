@@ -10,6 +10,7 @@ from OilTemp import OilTemp
 from common import plot
 from Params import Params
 
+# qt 接管了 python 的报错，下面的操作是为了接管回来，方便 debug
 # Back up the reference to the exceptionhook
 sys._excepthook = sys.excepthook
 
