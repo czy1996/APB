@@ -11,10 +11,22 @@ def init_fig_axes(depth):
 
 
 def plot(oil_temp, annular_temp):
+    set_ch()
     depth = oil_temp.params['well']['casing1']['depth']
     fig, axes = init_fig_axes(depth)
 
     oil_temp.plot(axes)
     annular_temp.plot(axes)
 
+    axes.set_xlabel('温度 ℃')
+    axes.set_ylabel('深度 m')
+
+    axes.legend()
+    fig.savefig('temp.png')
     fig.show()
+
+
+def set_ch():
+    from pylab import mpl
+    mpl.rcParams['font.sans-serif'] = ['FangSong']  # 指定默认字体
+    mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题

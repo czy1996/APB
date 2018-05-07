@@ -101,9 +101,9 @@ class AnnularTemp(Symbols,
     def _plot_with_axes(self, axes: Axes):
         depth = self.params['well']['casing1']['depth']  # 井的总深度
 
-        axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r')
-        axes.plot(self.temps_B_in_C, depth - self.zindex_B, 'b')
-        axes.plot(self.temps_C_in_C, depth - self.zindex_C, 'c')
+        axes.plot(self.temps_A_in_C, depth - self.zindex_A, 'r', label='环空 A 温度')
+        axes.plot(self.temps_B_in_C, depth - self.zindex_B, 'b', label='环空 B 温度')
+        axes.plot(self.temps_C_in_C, depth - self.zindex_C, 'c', label='环空 C 温度')
 
     def _plot_new_fig(self):
         depth = self.params['well']['casing1']['depth']  # 井的总深度

@@ -156,8 +156,8 @@ class OilTemperature(Symbols):
 
         temps = self.temps_in_C
         Z = self.zindex
-        axes.plot(temps, depth - Z, 'g')
-        axes.plot(self.temps_earth_in_C, depth - Z, 'y')
+        axes.plot(temps, depth - Z, 'g', label='产液温度')
+        axes.plot(self.temps_earth_in_C, depth - Z, 'y', label='地层温度')
 
     def plot(self, axes=None):
         if axes is None:

@@ -3,7 +3,8 @@ import json
 import traceback
 
 from mainWindow import Ui_MainWindow
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtGui import QPixmap
 
 from AnnularTemp import AnnularTemp
 from OilTemp import OilTemp
@@ -59,6 +60,16 @@ class MainWindow(QtWidgets.QMainWindow):
                                    oil_temp.zindex)
         annular_temp.run()
         plot(oil_temp, annular_temp)
+        self._load_image()
+
+    def _load_image(self):
+        p = QPixmap('temp.png')
+        label = self.ui.label_temp_image
+        label.setPixmap(p.scaled(
+            label.width(),
+            label.height(),
+            QtCore.Qt.KeepAspectRatio,
+        ))
 
     def _read_params(self):
         ui = self.ui
