@@ -1,6 +1,6 @@
 import sympy as sp
 
-from OilTemp.Symbols import Symbols
+from common.SymbolsOilTemp import Symbols
 
 
 class TD(Symbols):

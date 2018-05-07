@@ -1,6 +1,6 @@
 import sympy as sp
 
-from AnnularTemp.Symbols import Symbols
+from common.SymbolsAnnularTemp import Symbols
 from .UeA import UeAMixin
 from .UeB import UeBMixin
 from .UeC import UeCMixin

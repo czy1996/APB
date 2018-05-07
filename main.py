@@ -1,6 +1,5 @@
 from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
-from common import init_fig_axes
 from AnnularPressure.Pressure import Pressure
 from Params import Params
 
@@ -8,16 +7,6 @@ from sympy import init_printing, latex, pprint
 import json
 import pandas as pd
 import numpy as np
-
-
-def plot(oil_temp: OilTemp, annular_temp: AnnularTemp):
-    depth = oil_temp.params['well']['casing1']['depth']
-    fig, axes = init_fig_axes(depth)
-
-    oil_temp.plot(axes)
-    annular_temp.plot(axes)
-
-    fig.show()
 
 
 def export_to_excel(oil_temp: OilTemp, annular_temp: AnnularTemp):
@@ -53,9 +42,9 @@ def export_to_excel(oil_temp: OilTemp, annular_temp: AnnularTemp):
 def main():
     init_printing(use_unicode=True)
 
-    model = Params()
+    params = Params()
 
-    params = model.params
+    params = params.params
 
     oil_temp = OilTemp(params)
     oil_temp.load_params()

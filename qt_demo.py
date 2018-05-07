@@ -1,8 +1,29 @@
 import sys
 import json
+import traceback
 
 from mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets
+
+from AnnularTemp import AnnularTemp
+from OilTemp import OilTemp
+from common import plot
+from Params import Params
+
+# Back up the reference to the exceptionhook
+sys._excepthook = sys.excepthook
+
+
+def my_exception_hook(exctype, value, traceback):
+    # Print the error and traceback
+    print(exctype, value, traceback)
+    # Call the normal Exception hook after
+    sys._excepthook(exctype, value, traceback)
+    sys.exit(1)
+
+
+# Set the exception hook to our wrapping function
+sys.excepthook = my_exception_hook
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -19,6 +40,24 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.label_message.setText('button clicked')
         self._read_params()
         self._save_params()
+        self._run_temp()
+
+    def _run_temp(self):
+        params = Params('temp.json').params
+
+        oil_temp = OilTemp(params)
+        try:
+            oil_temp.load_params()
+        except Exception as e:
+            traceback.print_exc(e)
+            raise e
+
+        oil_temp.run()
+        annular_temp = AnnularTemp(params,
+                                   oil_temp.temps_in_K,
+                                   oil_temp.zindex)
+        annular_temp.run()
+        plot(oil_temp, annular_temp)
 
     def _read_params(self):
         ui = self.ui

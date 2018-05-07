@@ -4,7 +4,7 @@ import json
 import matplotlib.pyplot as plt
 
 from OilTemp.Ufe import Ufe
-from OilTemp.Symbols import Symbols
+from common.SymbolsOilTemp import Symbols
 from common.TD import TD
 from common import init_fig_axes
 

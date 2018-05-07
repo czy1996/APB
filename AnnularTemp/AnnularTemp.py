@@ -3,7 +3,7 @@ import numpy as np
 
 from matplotlib.axes import Axes
 
-from AnnularTemp.Symbols import Symbols
+from common.SymbolsAnnularTemp import Symbols
 from AnnularTemp.AnnularTempA import AnnularTempAMixin
 from AnnularTemp.AnnularTempB import AnnularTempBMixin
 from AnnularTemp.AnnularTempC import AnnularTempCMixin
