@@ -27,6 +27,10 @@ def plot(oil_temp, annular_temp):
 
 
 def set_ch():
+    """
+    这个函数的作用是防止 pylab 画出来的图里汉字是方块
+    :return:
+    """
     from pylab import mpl
     mpl.rcParams['font.sans-serif'] = ['FangSong']  # 指定默认字体
     mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
