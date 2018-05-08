@@ -1,6 +1,6 @@
 from sympy import Piecewise, ln
 
-from OilTemp.Symbols import Symbols
+from common.SymbolsOilTemp import Symbols
 
 
 class Ufe(Symbols):

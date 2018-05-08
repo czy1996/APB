@@ -1,9 +1,5 @@
 import sympy as sp
-import numpy as np
 
-from matplotlib import pyplot as plt
-
-from AnnularTemp.Symbols import Symbols
 from AnnularTemp.Ut import Ut
 from AnnularTemp.Ue import Ue
 from common.TD import TD

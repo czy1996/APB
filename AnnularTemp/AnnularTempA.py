@@ -1,5 +1,4 @@
 import sympy as sp
-import numpy as np
 
 from AnnularTemp.Ut import Ut
 from AnnularTemp.Ue import Ue
