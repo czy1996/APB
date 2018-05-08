@@ -2,7 +2,7 @@ import sys
 import json
 import traceback
 
-from mainWindow import Ui_MainWindow
+from Gui.mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import QPixmap
 
@@ -139,11 +139,3 @@ def _convert_to_digit(d: dict):
         elif isinstance(v, str):
             # print('v', v)
             d[k] = float(v)
-
-
-if __name__ == '__main__':
-    qt_debug()
-    app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())
