@@ -3,7 +3,6 @@ import traceback
 
 from Gui.mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtGui import QPixmap
 
 from AnnularTemp import AnnularTemp
 from OilTemp import OilTemp
@@ -36,7 +35,6 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.setup()
 
     def setup(self):
-
         self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
         self._load_params()
 
@@ -46,29 +44,6 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.worder = OilTempThread(self)
         self.worder.start()
 
-    def _run_temp(self):
-        params = Params('temp.json').params
 
-        oil_temp = OilTemp(params)
-        try:
-            oil_temp.load_params()
-        except Exception as e:
-            traceback.print_exc(e)
-            raise e
 
-        oil_temp.run()
-        annular_temp = AnnularTemp(params,
-                                   oil_temp.temps_in_K,
-                                   oil_temp.zindex)
-        annular_temp.run()
-        plot(oil_temp, annular_temp)
-        self._load_image()
 
-    def _load_image(self):
-        p = QPixmap('temp.png')
-        label = self.ui.label_temp_image
-        label.setPixmap(p.scaled(
-            label.width(),
-            label.height(),
-            QtCore.Qt.KeepAspectRatio,
-        ))
