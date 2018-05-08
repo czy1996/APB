@@ -1,6 +1,7 @@
 import sys
 import json
 import traceback
+import os
 
 from Gui.mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore
@@ -36,13 +37,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setup()
 
     def setup(self):
+        self.default_params_file = 'temp.json'
+
         self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
+        self._load_params()
 
     def buttonRun_cb(self):
         self.ui.label_message.setText('button clicked')
-        self._read_params()
-        self._save_params()
-        self._run_temp()
+        from .OilTempThread import OilTempThread
+        self.worder = OilTempThread(self)
+        self.worder.start()
 
     def _run_temp(self):
         params = Params('temp.json').params
@@ -70,6 +74,48 @@ class MainWindow(QtWidgets.QMainWindow):
             label.height(),
             QtCore.Qt.KeepAspectRatio,
         ))
+
+    def _load_params(self):
+        if os.path.isfile(self.default_params_file):
+            with open(self.default_params_file) as f:
+                params = json.load(f)
+
+            ui = self.ui
+
+            ui.input_depth1.setText(str(params['well']['casing1']['depth']))
+            ui.input_dc1o.setText(str(params['well']['casing1']['do']))
+            ui.input_dc1i.setText(str(params['well']['casing1']['di']))
+            ui.input_toc1.setText(str(params['well']['casing1']['toc']))
+
+            ui.input_depth2.setText(str(params['well']['casing2']['depth']))
+            ui.input_dc2o.setText(str(params['well']['casing2']['do']))
+            ui.input_dc2i.setText(str(params['well']['casing2']['di']))
+            ui.input_toc2.setText(str(params['well']['casing2']['toc']))
+
+            ui.input_depth3.setText(str(params['well']['casing3']['depth']))
+            ui.input_dc3o.setText(str(params['well']['casing3']['do']))
+            ui.input_dc3i.setText(str(params['well']['casing3']['di']))
+            ui.input_toc3.setText(str(params['well']['casing3']['toc']))
+
+            ui.input_dto.setText(str(params['well']['tubing']['do']))
+            ui.input_dti.setText(str(params['well']['tubing']['di']))
+
+            ui.input_tcem.setText(str(params['well']['etc']['tcem']))
+            ui.input_m.setText(str(params['thermal']['m']))
+            ui.input_W.setText(str(params['thermal']['W']))
+            ui.input_cp_oil.setText(str(params['thermal']['Cp_oil']))
+            ui.input_cp_annular.setText(str(params['thermal']['Cp_annular']))
+            ui.input_h.setText(str(params['thermal']['h']))
+            ui.input_Kc.setText(str(params['thermal']['Kc']))
+            ui.input_Ka.setText(str(params['thermal']['Ka']))
+            ui.input_Kcem.setText(str(params['thermal']['Kcem']))
+            ui.input_Kt.setText(str(params['thermal']['Kt']))
+            ui.input_Ke.setText(str(params['thermal']['Ke']))
+            ui.input_density_oil.setText(str(params['thermal']['density_oil']))
+            ui.input_density_annular.setText(str(params['thermal']['density_annular']))
+            ui.input_ae.setText(str(params['thermal']['ae']))
+            ui.input_temp_surface.setText(str(params['thermal']['temp_surface']))
+            ui.input_t.setText(str(params['etc']['t']))
 
     def _read_params(self):
         ui = self.ui
