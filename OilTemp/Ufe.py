@@ -14,7 +14,6 @@ class Ufe(Symbols):
 
         :param temp: OilTemperature 类
         """
-        super().__init__()
 
         # 保存一个对 OilTemp 的引用
         self.temp = temp

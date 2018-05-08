@@ -15,7 +15,6 @@ class TD(Symbols):
         :param temp: OilTemperature Class
         本函数注释同 Ufe
         """
-        super().__init__()
         self.temp = temp
         self.params = temp.params
         self.depth = self.params['well']['casing1']['depth'] - self.temp.Z

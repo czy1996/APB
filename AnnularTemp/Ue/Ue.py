@@ -10,7 +10,6 @@ ln = sp.ln
 
 class Ue(Symbols, UeAMixin, UeBMixin, UeCMixin):
     def __init__(self, temp):
-        super().__init__()
 
         self.temp = temp
 

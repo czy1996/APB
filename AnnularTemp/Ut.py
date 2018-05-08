@@ -9,8 +9,6 @@ class Ut(Symbols):
     """
 
     def __init__(self, temp):
-        super().__init__()
-
         self.temp = temp
 
         self.params = temp.params

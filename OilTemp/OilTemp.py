@@ -11,8 +11,6 @@ from common import init_fig_axes
 
 class OilTemperature(Symbols):
     def __init__(self, params):
-        # 初始化符号
-        super().__init__()
         # 结构参数
         self.params = params
 
