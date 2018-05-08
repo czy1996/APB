@@ -11,21 +11,21 @@ from OilTemp import OilTemp
 from common import plot
 from Params import Params
 
-# qt 接管了 python 的报错，下面的操作是为了接管回来，方便 debug
-# Back up the reference to the exceptionhook
-sys._excepthook = sys.excepthook
 
+def qt_debug():
+    # qt 接管了 python 的报错，下面的操作是为了接管回来，方便 debug
+    # Back up the reference to the exceptionhook
+    sys._excepthook = sys.excepthook
 
-def my_exception_hook(exctype, value, traceback):
-    # Print the error and traceback
-    print(exctype, value, traceback)
-    # Call the normal Exception hook after
-    sys._excepthook(exctype, value, traceback)
-    sys.exit(1)
+    def my_exception_hook(exctype, value, traceback):
+        # Print the error and traceback
+        print(exctype, value, traceback)
+        # Call the normal Exception hook after
+        sys._excepthook(exctype, value, traceback)
+        sys.exit(1)
 
-
-# Set the exception hook to our wrapping function
-sys.excepthook = my_exception_hook
+    # Set the exception hook to our wrapping function
+    sys.excepthook = my_exception_hook
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -142,6 +142,7 @@ def _convert_to_digit(d: dict):
 
 
 if __name__ == '__main__':
+    qt_debug()
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
