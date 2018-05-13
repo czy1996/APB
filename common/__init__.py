@@ -23,7 +23,7 @@ def plot(oil_temp, annular_temp):
 
     axes.legend()
     fig.savefig('temp.png')
-    fig.show()
+    # fig.show()
 
 
 def set_ch():

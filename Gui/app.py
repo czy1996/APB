@@ -40,10 +40,11 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
 
     def buttonRun_cb(self):
         # self.ui.label_message.setText('button clicked')
-        from .OilTempThread import OilTempThread
-        self.worker = OilTempThread(self)
+        from .CalThread import CalThread
+        self.worker = CalThread(self)
+        self.worker.finished.connect(self.watch_thread)
         self.worker.start()
 
-
-
-
+    def watch_thread(self):
+        print('thread terminated')
+        print(self.worker, 'is running', self.worker.isRunning())
