@@ -14,6 +14,7 @@ class OilTempThread(QThread):
         self._parent = parent
 
     def _run_temp(self):
+        self.parent().ui.label_message.setText('正在计算温度')
         params = Params('temp.json').params
 
         oil_temp = OilTemp(params)
@@ -26,6 +27,8 @@ class OilTempThread(QThread):
         annular_temp.run()
         plot(oil_temp, annular_temp)
         self._load_image()
+        self.parent().ui.label_message.setText('温度计算完成')
+
 
     def _load_image(self):
         p = QPixmap('temp.png')

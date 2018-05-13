@@ -39,10 +39,10 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self._load_params()
 
     def buttonRun_cb(self):
-        self.ui.label_message.setText('button clicked')
+        # self.ui.label_message.setText('button clicked')
         from .OilTempThread import OilTempThread
-        self.worder = OilTempThread(self)
-        self.worder.start()
+        self.worker = OilTempThread(self)
+        self.worker.start()
 
 
 

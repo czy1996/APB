@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         self.buttonRun.setGeometry(QtCore.QRect(180, 500, 75, 23))
         self.buttonRun.setObjectName("buttonRun")
         self.label_message = QtWidgets.QLabel(self.centralwidget)
-        self.label_message.setGeometry(QtCore.QRect(250, 480, 91, 21))
+        self.label_message.setGeometry(QtCore.QRect(260, 500, 91, 21))
         self.label_message.setText("")
         self.label_message.setObjectName("label_message")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
