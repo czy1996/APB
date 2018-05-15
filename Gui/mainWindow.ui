@@ -93,7 +93,7 @@
        <x>11</x>
        <y>401</y>
        <width>131</width>
-       <height>61</height>
+       <height>68</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="Tubing">
@@ -199,7 +199,7 @@
        <x>151</x>
        <y>21</y>
        <width>221</width>
-       <height>371</height>
+       <height>380</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="thermal">
@@ -526,10 +526,10 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="label_22">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>560</x>
       <y>360</y>
       <width>81</width>
       <height>21</height>
@@ -539,10 +539,10 @@
      <string>B环空增压</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_21">
+   <widget class="QLabel" name="label_23">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>560</x>
       <y>390</y>
       <width>81</width>
       <height>21</height>
@@ -552,11 +552,11 @@
      <string>C环空增压</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_pressure_B">
+   <widget class="QLabel" name="label_d_pressure_C">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>360</y>
+      <x>650</x>
+      <y>390</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -565,11 +565,11 @@
      <string>未计算</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_pressure_C">
+   <widget class="QLabel" name="label_d_pressure_B">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>390</y>
+      <x>650</x>
+      <y>360</y>
       <width>71</width>
       <height>21</height>
      </rect>

@@ -40,16 +40,24 @@ class CalThread(QThread):
         pressure_c = Pressure(self.params,
                               self.annular_temp.temps_C_in_C,
                               self.annular_temp.zindex_C)
-        print('delta p c', pressure_c.delta_p())
-        self.parent().ui.label_pressure_C.setText(str(pressure_c.delta_p()) + 'MPa')
 
         pressure_b = Pressure(self.params,
                               self.annular_temp.temps_B_in_C,
                               self.annular_temp.zindex_B)
-        self.parent().ui.label_pressure_B.setText(str(pressure_b.delta_p()) + 'MPa')
+
+        self.parent().ui.label_d_pressure_C.setText(str(pressure_c.pressure_delta) + 'MPa')
+
+        self.parent().ui.label_d_pressure_B.setText(str(pressure_b.pressure_delta) + 'MPa')
+        #
+        # self.parent().ui.label_pressure_C.setText(str(pressure_c.pressure_initial) + 'MPa')
+        #
+        # self.parent().ui.label_pressure_B.setText(str(pressure_b.pressure_initial) + 'MPa')
+        #
+        # self.parent().ui.label_pressure_C_after.setText(str(pressure_c.pressure_after) + 'MPa')
+        #
+        # self.parent().ui.label_pressure_B_after.setText(str(pressure_b.pressure_after) + 'MPa')
 
         self.parent().ui.label_message.setText('压力计算完成')
-
 
     def _load_image(self):
         p = QPixmap('temp.png')

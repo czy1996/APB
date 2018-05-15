@@ -68,3 +68,15 @@ class Pressure:
         _p = (np.sum(dt * self._density.alpha(temp, pressure)) /
               np.sum(self._density.k(temp, pressure)))
         return _p
+
+    @property
+    def pressure_initial(self):
+        return round(self.liquid_pressure[0], 2)
+
+    @property
+    def pressure_delta(self):
+        return round(self.delta_p(), 2)
+
+    @property
+    def pressure_after(self):
+        return round(self.pressure_initial + self.pressure_delta)
