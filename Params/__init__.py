@@ -5,25 +5,32 @@ import json
 
 
 class Params:
-    def __init__(self, params_file='data.json'):
+    def __init__(self, params_file='data.json', params_dict=None):
         self.params_file = params_file
-        self.read_params()
+
+        # print('params dict', params_dict)
+        if params_dict is None:
+            self.read_params_from_file()
+
+            self.params_map = {
+                'depth1': self.params['well']['casing1']['depth'],
+                'depth2': self.params['well']['casing2']['depth'],
+                'depth3': self.params['well']['casing3']['depth'],
+                'Thead': self.params['thermal']['temp_surface'],
+                'density_of_oil': self.params['thermal']['density_oil'],
+                'Cp_oil': self.params['thermal']['Cp_oil'],
+                'W': self.params['thermal']['W'],
+                'm': self.params['thermal']['m'],
+                'Ke': self.params['thermal']['Ke'],
+
+            }
+
+        else:
+            self.params = params_dict
+
         self.convert_params()
 
-        self.params_map = {
-            'depth1': self.params['well']['casing1']['depth'],
-            'depth2': self.params['well']['casing2']['depth'],
-            'depth3': self.params['well']['casing3']['depth'],
-            'Thead': self.params['thermal']['temp_surface'],
-            'density_of_oil': self.params['thermal']['density_oil'],
-            'Cp_oil': self.params['thermal']['Cp_oil'],
-            'W': self.params['thermal']['W'],
-            'm': self.params['thermal']['m'],
-            'Ke': self.params['thermal']['Ke'],
-
-        }
-
-    def read_params(self):
+    def read_params_from_file(self):
         with open(self.params_file) as f:
             self.params = json.load(f)
 
@@ -57,5 +64,8 @@ class Params:
         if item not in self.params:
             raise AttributeError('No such params: {}'.format(item))
 
+    def set_time_day(self, time):
+        self.params['etc']['t'] = 24 * 3600 * time
 
-
+    def set_production_rate(self, w):
+        self.params['thermal']['W'] = w * 1000 / 24 / 3600
