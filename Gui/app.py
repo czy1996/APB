@@ -1,13 +1,12 @@
 import sys
-import traceback
 
 from Gui.mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QVBoxLayout
 
-from AnnularTemp import AnnularTemp
-from OilTemp import OilTemp
-from common import plot
-from Params import Params
+from matplotlib.backends.backend_qt5agg import FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib as mpl
 from .ParamsMixin import ParamsMixin
 
 
@@ -34,11 +33,29 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.ui.setupUi(self)
         self.setup()
 
+    def init_canvas(self):
+        # 防止 pylab 画出来的图里汉字是方块
+        mpl.rcParams['font.sans-serif'] = ['FangSong']  # 指定默认字体
+        mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
+        label = self.ui.label_temp_image
+        layout = QVBoxLayout()
+        label.setLayout(layout)
+        canvas = FigureCanvas(Figure())
+        axes = canvas.figure.add_axes([0.15, 0.1, 0.7, 0.8])
+        axes.set_xlabel('温度 ℃')
+        axes.set_ylabel('深度 m')
+        canvas.setParent(label)
+        layout.addWidget(canvas)
+        self.canvas = canvas
+        self.axes = axes
+
     def setup(self):
         self.setFixedSize(920, 600)
 
         self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
         self._load_params()
+
+        self.init_canvas()
 
     def buttonRun_cb(self):
         # self.ui.label_message.setText('button clicked')
