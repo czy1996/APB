@@ -32,10 +32,11 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setFixedSize(920, 600)
         self.setup()
 
     def setup(self):
+        self.setFixedSize(920, 600)
+
         self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
         self._load_params()
 

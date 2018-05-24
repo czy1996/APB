@@ -98,14 +98,6 @@ class CalThread(QThread):
         self.parent().ui.label_d_pressure_C.setText(str(pressure_c.pressure_delta) + 'MPa')
 
         self.parent().ui.label_d_pressure_B.setText(str(pressure_b.pressure_delta) + 'MPa')
-        #
-        # self.parent().ui.label_pressure_C.setText(str(pressure_c.pressure_initial) + 'MPa')
-        #
-        # self.parent().ui.label_pressure_B.setText(str(pressure_b.pressure_initial) + 'MPa')
-        #
-        # self.parent().ui.label_pressure_C_after.setText(str(pressure_c.pressure_after) + 'MPa')
-        #
-        # self.parent().ui.label_pressure_B_after.setText(str(pressure_b.pressure_after) + 'MPa')
 
         self.show_message('压力计算完成')
 
