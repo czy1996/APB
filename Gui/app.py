@@ -53,7 +53,8 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.setFixedSize(920, 600)
 
         self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
-        self._load_params()
+        self.ui.buttonParamsLoad.clicked.connect(self.load_params_from_file)
+        self.ui.buttonParamsSave.clicked.connect(self.save_params_to_file)
 
         self.init_canvas()
 

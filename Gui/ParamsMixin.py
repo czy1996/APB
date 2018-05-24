@@ -1,5 +1,6 @@
 import os
 import json
+from PyQt5 import QtWidgets
 
 
 def _convert_to_digit(d: dict):
@@ -16,7 +17,6 @@ class ParamsError(Exception):
 
 
 class ParamsMixin:
-    default_params_file = 'temp.json'
 
     def _set_params_input(self, params):
         ui = self.ui
@@ -56,11 +56,11 @@ class ParamsMixin:
         ui.input_temp_surface.setText(str(params['thermal']['temp_surface']))
         ui.input_t.setText(str(params['etc']['t']))
 
-    def _load_params(self):
+    def _load_params(self, file_path='temp.json'):
 
-        if os.path.isfile(self.default_params_file):
+        if os.path.isfile(file_path):
             try:
-                with open(self.default_params_file) as f:
+                with open(file_path) as f:
                     params = json.load(f)
             except Exception:
                 raise ParamsError('读取井身配置出错')
@@ -134,3 +134,16 @@ class ParamsMixin:
     def _save_params(self, filename='temp.json'):
         with open(filename, 'w') as f:
             json.dump(self.params, f, indent=4)
+
+    def load_params_from_file(self):
+        file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择井身参数文件', filter='JSON file(*.json)')
+        self._load_params(file_name[0])
+        self.show_message('读取了{}'.format(file_name[0]))
+
+    def save_params_to_file(self):
+        file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择保存文件', filter='JSON file(*.json)')
+        if self.params is None:
+            self._read_and_convert()
+        self._save_params(file_name[0])
+        self.show_message('保存了{}'.format(file_name[0]))
+

@@ -25,25 +25,12 @@
      <rect>
       <x>630</x>
       <y>430</y>
-      <width>75</width>
+      <width>91</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>运行</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_message">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>430</y>
-      <width>131</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
@@ -590,18 +577,33 @@
       <string>未计算</string>
      </property>
     </widget>
-    <zorder>label_22</zorder>
-    <zorder>label_d_pressure_B</zorder>
-    <zorder>label_23</zorder>
-    <zorder>label_d_pressure_C</zorder>
-    <zorder>groupBox_2</zorder>
    </widget>
-   <zorder>buttonRun</zorder>
-   <zorder>label_message</zorder>
-   <zorder>groupBox</zorder>
-   <zorder>groupBox_2</zorder>
-   <zorder>groupBox_3</zorder>
-   <zorder>input_t</zorder>
+   <widget class="QPushButton" name="buttonParamsLoad">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>430</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>导入参数文件</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonParamsSave">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>470</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>保存参数文件</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
