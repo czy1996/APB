@@ -6,23 +6,28 @@ from Params import Params
 from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
 from AnnularPressure import Pressure
+from .ParamsMixin import ParamsError
 from common import plot
 
 
 class CalThread(QThread):
-    show_status_message = pyqtSignal(str)
+    signal_show_status_message = pyqtSignal(str)
+    signal_show_err_message = pyqtSignal(str)
 
-    def __init__(self,parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self._parent = parent
         self.axes = parent.axes
         self.canvas = parent.canvas
 
-    def show_message(self, message):
-        self.show_status_message.emit(message)
+    def show_status_message(self, message):
+        self.signal_show_status_message.emit(message)
+
+    def show_err_message(self, message):
+        self.signal_show_err_message.emit(message)
 
     def _run_temp(self):
-        self.show_message('正在计算温度')
+        self.show_status_message('正在计算温度')
         params = Params('temp.json').params
         self.params = params
 
@@ -38,7 +43,7 @@ class CalThread(QThread):
         self.oil_temp = oil_temp
         self.annular_temp = annular_temp
 
-        self.show_message('温度计算完成')
+        self.show_status_message('温度计算完成')
         self.plot_with_canvas()
         # self.parent().ui.label_message.setText('温度计算完成')
 
@@ -65,7 +70,7 @@ class CalThread(QThread):
         self.canvas.draw()
 
     def _run_pressure(self):
-        self.show_message('正在计算压力')
+        self.show_status_message('正在计算压力')
 
         pressure_c = Pressure(self.params,
                               self.annular_temp.temps_C_in_C,
@@ -79,7 +84,7 @@ class CalThread(QThread):
 
         self.parent().ui.label_d_pressure_B.setText(str(pressure_b.pressure_delta) + 'MPa')
 
-        self.show_message('压力计算完成')
+        self.show_status_message('压力计算完成')
 
     def _load_image(self):
         """
@@ -96,8 +101,13 @@ class CalThread(QThread):
         ))
 
     def run(self):
-        self._parent._read_params()
-        self._parent._save_params()
-        self._run_temp()
-        self._run_pressure()
+        try:
+            self._parent._read_params()
+            self._parent._save_params()
+            self._run_temp()
+            self._run_pressure()
+        except ParamsError as e:
+            print('params error in thread')
+            self.show_err_message(str(e))
+
         self.exit()

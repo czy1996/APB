@@ -68,7 +68,7 @@ class ParamsMixin:
             try:
                 self._set_params_input(params)
             except Exception:
-                raise ParamsError('井身配置不符合要求')
+                raise ParamsError('井身配置文件不符合要求')
 
     def _read_and_convert(self):
         ui = self.ui
@@ -136,14 +136,20 @@ class ParamsMixin:
             json.dump(self.params, f, indent=4)
 
     def load_params_from_file(self):
-        file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择井身参数文件', filter='JSON file(*.json)')
-        self._load_params(file_name[0])
-        self.show_message('读取了{}'.format(file_name[0]))
+        try:
+            file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择井身参数文件', filter='JSON file(*.json)')
+            self._load_params(file_name[0])
+            self.show_message('读取了{}'.format(file_name[0]))
+        except ParamsError as e:
+            self.err_message(str(e))
 
     def save_params_to_file(self):
-        file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择保存文件', filter='JSON file(*.json)')
-        if self.params is None:
-            self._read_and_convert()
-        self._save_params(file_name[0])
-        self.show_message('保存了{}'.format(file_name[0]))
+
+        try:
+            self._read_params()
+            file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择保存文件', filter='JSON file(*.json)')
+            self._save_params(file_name[0])
+            self.show_message('保存了{}'.format(file_name[0]))
+        except ParamsError as e:
+            self.err_message(str(e))
 

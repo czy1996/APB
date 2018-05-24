@@ -2,12 +2,12 @@ import sys
 
 from Gui.mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QVBoxLayout
+from PyQt5.QtWidgets import QVBoxLayout, QMessageBox
 
 from matplotlib.backends.backend_qt5agg import FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib as mpl
-from .ParamsMixin import ParamsMixin
+from .ParamsMixin import ParamsMixin, ParamsError
 from .CalThread import CalThread
 
 
@@ -64,7 +64,8 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.ui.buttonRun.setDisabled(True)
         self.worker = CalThread(self)
         self.worker.finished.connect(self.thread_terminated)
-        self.worker.show_status_message.connect(self.show_message)
+        self.worker.signal_show_status_message.connect(self.show_message)
+        self.worker.signal_show_err_message.connect(self.err_message)
         self.worker.start()
 
     def thread_terminated(self):
@@ -78,3 +79,7 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         :return:
         """
         self.statusBar().showMessage(message)
+
+    def err_message(self, message):
+        print(message, type(message))
+        b = QMessageBox.warning(self, '错误', message, QMessageBox.Ok)
