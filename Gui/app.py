@@ -8,6 +8,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib as mpl
 from .ParamsMixin import ParamsMixin
+from .CalThread import CalThread
 
 
 def qt_debug():
@@ -60,14 +61,15 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
 
     def buttonRun_cb(self):
         # self.ui.label_message.setText('button clicked')
-        from .CalThread import CalThread
+        self.ui.buttonRun.setDisabled(True)
         self.worker = CalThread(self)
-        self.worker.finished.connect(self.watch_thread)
+        self.worker.finished.connect(self.thread_terminated)
         self.worker.show_status_message.connect(self.show_message)
         self.worker.start()
 
-    def watch_thread(self):
+    def thread_terminated(self):
         print('thread terminated')
+        self.ui.buttonRun.setDisabled(False)
         print(self.worker, 'is running', self.worker.isRunning())
 
     def show_message(self, message):
