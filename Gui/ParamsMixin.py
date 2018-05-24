@@ -11,52 +11,66 @@ def _convert_to_digit(d: dict):
             d[k] = float(v)
 
 
+class ParamsError(Exception):
+    pass
+
+
 class ParamsMixin:
     default_params_file = 'temp.json'
 
+    def _set_params_input(self, params):
+        ui = self.ui
+
+        ui.input_depth1.setText(str(params['well']['casing1']['depth']))
+        ui.input_dc1o.setText(str(params['well']['casing1']['do']))
+        ui.input_dc1i.setText(str(params['well']['casing1']['di']))
+        ui.input_toc1.setText(str(params['well']['casing1']['toc']))
+
+        ui.input_depth2.setText(str(params['well']['casing2']['depth']))
+        ui.input_dc2o.setText(str(params['well']['casing2']['do']))
+        ui.input_dc2i.setText(str(params['well']['casing2']['di']))
+        ui.input_toc2.setText(str(params['well']['casing2']['toc']))
+
+        ui.input_depth3.setText(str(params['well']['casing3']['depth']))
+        ui.input_dc3o.setText(str(params['well']['casing3']['do']))
+        ui.input_dc3i.setText(str(params['well']['casing3']['di']))
+        ui.input_toc3.setText(str(params['well']['casing3']['toc']))
+
+        ui.input_dto.setText(str(params['well']['tubing']['do']))
+        ui.input_dti.setText(str(params['well']['tubing']['di']))
+
+        ui.input_tcem.setText(str(params['well']['etc']['tcem']))
+        ui.input_m.setText(str(params['thermal']['m']))
+        ui.input_W.setText(str(params['thermal']['W']))
+        ui.input_cp_oil.setText(str(params['thermal']['Cp_oil']))
+        ui.input_cp_annular.setText(str(params['thermal']['Cp_annular']))
+        ui.input_h.setText(str(params['thermal']['h']))
+        ui.input_Kc.setText(str(params['thermal']['Kc']))
+        ui.input_Ka.setText(str(params['thermal']['Ka']))
+        ui.input_Kcem.setText(str(params['thermal']['Kcem']))
+        ui.input_Kt.setText(str(params['thermal']['Kt']))
+        ui.input_Ke.setText(str(params['thermal']['Ke']))
+        ui.input_density_oil.setText(str(params['thermal']['density_oil']))
+        ui.input_density_annular.setText(str(params['thermal']['density_annular']))
+        ui.input_ae.setText(str(params['thermal']['ae']))
+        ui.input_temp_surface.setText(str(params['thermal']['temp_surface']))
+        ui.input_t.setText(str(params['etc']['t']))
+
     def _load_params(self):
+
         if os.path.isfile(self.default_params_file):
-            with open(self.default_params_file) as f:
-                params = json.load(f)
+            try:
+                with open(self.default_params_file) as f:
+                    params = json.load(f)
+            except Exception:
+                raise ParamsError('读取井身配置出错')
 
-            ui = self.ui
+            try:
+                self._set_params_input(params)
+            except Exception:
+                raise ParamsError('井身配置不符合要求')
 
-            ui.input_depth1.setText(str(params['well']['casing1']['depth']))
-            ui.input_dc1o.setText(str(params['well']['casing1']['do']))
-            ui.input_dc1i.setText(str(params['well']['casing1']['di']))
-            ui.input_toc1.setText(str(params['well']['casing1']['toc']))
-
-            ui.input_depth2.setText(str(params['well']['casing2']['depth']))
-            ui.input_dc2o.setText(str(params['well']['casing2']['do']))
-            ui.input_dc2i.setText(str(params['well']['casing2']['di']))
-            ui.input_toc2.setText(str(params['well']['casing2']['toc']))
-
-            ui.input_depth3.setText(str(params['well']['casing3']['depth']))
-            ui.input_dc3o.setText(str(params['well']['casing3']['do']))
-            ui.input_dc3i.setText(str(params['well']['casing3']['di']))
-            ui.input_toc3.setText(str(params['well']['casing3']['toc']))
-
-            ui.input_dto.setText(str(params['well']['tubing']['do']))
-            ui.input_dti.setText(str(params['well']['tubing']['di']))
-
-            ui.input_tcem.setText(str(params['well']['etc']['tcem']))
-            ui.input_m.setText(str(params['thermal']['m']))
-            ui.input_W.setText(str(params['thermal']['W']))
-            ui.input_cp_oil.setText(str(params['thermal']['Cp_oil']))
-            ui.input_cp_annular.setText(str(params['thermal']['Cp_annular']))
-            ui.input_h.setText(str(params['thermal']['h']))
-            ui.input_Kc.setText(str(params['thermal']['Kc']))
-            ui.input_Ka.setText(str(params['thermal']['Ka']))
-            ui.input_Kcem.setText(str(params['thermal']['Kcem']))
-            ui.input_Kt.setText(str(params['thermal']['Kt']))
-            ui.input_Ke.setText(str(params['thermal']['Ke']))
-            ui.input_density_oil.setText(str(params['thermal']['density_oil']))
-            ui.input_density_annular.setText(str(params['thermal']['density_annular']))
-            ui.input_ae.setText(str(params['thermal']['ae']))
-            ui.input_temp_surface.setText(str(params['thermal']['temp_surface']))
-            ui.input_t.setText(str(params['etc']['t']))
-
-    def _read_params(self):
+    def _read_and_convert(self):
         ui = self.ui
         params = {
             'well': {
@@ -109,8 +123,13 @@ class ParamsMixin:
         }
 
         _convert_to_digit(params)
-
         self.params = params
+
+    def _read_params(self):
+        try:
+            self._read_and_convert()
+        except ValueError:
+            raise ParamsError('井身结构数据有误，请检查数据')
 
     def _save_params(self, filename='temp.json'):
         with open(filename, 'w') as f:
