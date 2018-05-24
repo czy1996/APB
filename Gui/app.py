@@ -32,6 +32,7 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setFixedSize(920, 600)
         self.setup()
 
     def setup(self):
@@ -43,8 +44,16 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         from .CalThread import CalThread
         self.worker = CalThread(self)
         self.worker.finished.connect(self.watch_thread)
+        self.worker.show_status_message.connect(self.show_message)
         self.worker.start()
 
     def watch_thread(self):
         print('thread terminated')
         print(self.worker, 'is running', self.worker.isRunning())
+
+    def show_message(self, message):
+        """
+        在状态栏输出消息
+        :return:
+        """
+        self.statusBar().showMessage(message)
