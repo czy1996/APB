@@ -3,8 +3,7 @@ import sys
 from Gui.mainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QVBoxLayout, QMessageBox
-
-from matplotlib.backends.backend_qt5agg import FigureCanvas
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib as mpl
 from .ParamsMixin import ParamsMixin, ParamsError
@@ -36,15 +35,13 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
 
     def init_canvas(self):
         # 防止 pylab 画出来的图里汉字是方块
-        mpl.rcParams['font.sans-serif'] = ['FangSong']  # 指定默认字体
+        mpl.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体
         mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
         label = self.ui.label_temp_image
         layout = QVBoxLayout()
         label.setLayout(layout)
         canvas = FigureCanvas(Figure())
-        axes = canvas.figure.add_axes([0.15, 0.1, 0.7, 0.8])
-        axes.set_xlabel('温度 ℃')
-        axes.set_ylabel('深度 m')
+        axes = canvas.figure.add_axes([0.15, 0.15, 0.8, 0.7])
         canvas.setParent(label)
         layout.addWidget(canvas)
         self.canvas = canvas

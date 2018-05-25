@@ -66,7 +66,9 @@ class CalThread(QThread):
         oil_temp.plot(axes)
         annular_temp.plot(axes)
 
-        axes.legend(loc='best', fontsize='x-small')
+        axes.set_xlabel('温度 ℃')
+        axes.set_ylabel('深度 m')
+        axes.legend(loc='best', fontsize='small')
         self.canvas.draw()
 
     def _run_pressure(self):
