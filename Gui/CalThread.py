@@ -13,6 +13,8 @@ from common import plot
 class CalThread(QThread):
     signal_show_status_message = pyqtSignal(str)
     signal_show_err_message = pyqtSignal(str)
+    signal_calc_temp_finished = pyqtSignal(OilTemp, AnnularTemp)
+    signal_calc_pressure_finished = pyqtSignal(Pressure, Pressure)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -33,8 +35,8 @@ class CalThread(QThread):
 
         oil_temp = OilTemp(params)
         oil_temp.load_params()
-
         oil_temp.run()
+
         annular_temp = AnnularTemp(params,
                                    oil_temp.temps_in_K,
                                    oil_temp.zindex)
@@ -44,32 +46,7 @@ class CalThread(QThread):
         self.annular_temp = annular_temp
 
         self.show_status_message('温度计算完成')
-        self.plot_with_canvas()
-        # self.parent().ui.label_message.setText('温度计算完成')
-
-    def _draw_temp_plot(self):
-        plot(self.oil_temp, self.annular_temp)
-        self._load_image()
-
-    def plot_with_canvas(self):
-        # set_ch()
-        oil_temp, annular_temp = self.oil_temp, self.annular_temp
-        depth = oil_temp.params['well']['casing1']['depth']
-
-        axes = self.axes
-        axes.clear()
-
-        axes.set_ylim(top=0, bottom=depth)
-        axes.xaxis.tick_top()  # 将 x 坐标移到上方
-        axes.grid()
-
-        oil_temp.plot(axes)
-        annular_temp.plot(axes)
-
-        axes.set_xlabel('温度 ℃')
-        axes.set_ylabel('深度 m')
-        axes.legend(loc='best', fontsize='small')
-        self.canvas.draw()
+        self.signal_calc_temp_finished.emit(oil_temp, annular_temp)
 
     def _run_pressure(self):
         self.show_status_message('正在计算压力')
@@ -82,25 +59,9 @@ class CalThread(QThread):
                               self.annular_temp.temps_B_in_C,
                               self.annular_temp.zindex_B)
 
-        self.parent().ui.label_d_pressure_C.setText(str(pressure_c.pressure_delta) + 'MPa')
-
-        self.parent().ui.label_d_pressure_B.setText(str(pressure_b.pressure_delta) + 'MPa')
-
         self.show_status_message('压力计算完成')
 
-    def _load_image(self):
-        """
-        废弃
-        :return:
-        """
-        p = QPixmap('temp.png')
-        label = self._parent.ui.label_temp_image
-        print(label.width(), label.height())
-        label.setPixmap(p.scaled(
-            label.width(),
-            label.height(),
-            QtCore.Qt.KeepAspectRatio,
-        ))
+        self.signal_calc_pressure_finished.emit(pressure_b, pressure_c)
 
     def run(self):
         try:

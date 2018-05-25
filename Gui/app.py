@@ -1,13 +1,18 @@
 import sys
 
 from Gui.mainWindow import Ui_MainWindow
+
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QVBoxLayout, QMessageBox
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib as mpl
+
 from .ParamsMixin import ParamsMixin, ParamsError
 from .CalThread import CalThread
+from OilTemp import OilTemp
+from AnnularTemp import AnnularTemp
+from AnnularPressure import Pressure
 
 
 def qt_debug():
@@ -53,6 +58,7 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
         self.ui.buttonParamsLoad.clicked.connect(self.load_params_from_file)
         self.ui.buttonParamsSave.clicked.connect(self.save_params_to_file)
+        self.ui.buttonResultSave.setDisabled(True)
 
         self.init_canvas()
 
@@ -63,6 +69,8 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         self.worker.finished.connect(self.thread_terminated)
         self.worker.signal_show_status_message.connect(self.show_message)
         self.worker.signal_show_err_message.connect(self.err_message)
+        self.worker.signal_calc_temp_finished.connect(self.calc_temp_finished)
+        self.worker.signal_calc_pressure_finished.connect(self.calc_pressure_finished)
         self.worker.start()
 
     def thread_terminated(self):
@@ -80,3 +88,33 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
     def err_message(self, message):
         print(message, type(message))
         b = QMessageBox.warning(self, '错误', message, QMessageBox.Ok)
+
+    def plot_with_canvas(self):
+        # set_ch()
+        oil_temp, annular_temp = self.oil_temp, self.annular_temp
+        depth = oil_temp.params['well']['casing1']['depth']
+
+        axes = self.axes
+        axes.clear()
+
+        axes.set_ylim(top=0, bottom=depth)
+        axes.xaxis.tick_top()  # 将 x 坐标移到上方
+        axes.grid()
+
+        oil_temp.plot(axes)
+        annular_temp.plot(axes)
+
+        axes.set_xlabel('温度 ℃')
+        axes.set_ylabel('深度 m')
+        axes.legend(loc='best', fontsize='small')
+        self.canvas.draw()
+
+    @QtCore.pyqtSlot(OilTemp, AnnularTemp)
+    def calc_temp_finished(self, oil_temp, annular_temp):
+        self.oil_temp, self.annular_temp = oil_temp, annular_temp
+        self.plot_with_canvas()
+
+    @QtCore.pyqtSlot(Pressure, Pressure)
+    def calc_pressure_finished(self, pressure_b, pressure_c):
+        self.ui.label_d_pressure_C.setText(str(pressure_c.pressure_delta) + 'MPa')
+        self.ui.label_d_pressure_B.setText(str(pressure_b.pressure_delta) + 'MPa')
