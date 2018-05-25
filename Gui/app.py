@@ -2,20 +2,16 @@ import sys
 
 from Gui.mainWindow import Ui_MainWindow
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QVBoxLayout, QMessageBox
 
 import matplotlib as mpl
-import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 from .ParamsMixin import ParamsMixin
 from .SlotMixin import SlotMixin
 from .CalThread import CalThread
-from OilTemp import OilTemp
-from AnnularTemp import AnnularTemp
-from AnnularPressure import Pressure
 
 
 def qt_debug():
@@ -112,4 +108,3 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin, SlotMixin):
         axes.set_ylabel('深度 m')
         axes.legend(loc='best', fontsize='small')
         self.canvas.draw()
-
