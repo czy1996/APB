@@ -11,6 +11,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 from .ParamsMixin import ParamsMixin
+from .SlotMixin import SlotMixin
 from .CalThread import CalThread
 from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
@@ -37,7 +38,7 @@ class APBError(Exception):
     pass
 
 
-class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
+class MainWindow(QtWidgets.QMainWindow, ParamsMixin, SlotMixin):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
@@ -116,41 +117,6 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
         axes.set_ylabel('深度 m')
         axes.legend(loc='best', fontsize='small')
         self.canvas.draw()
-
-    @QtCore.pyqtSlot(OilTemp, AnnularTemp)
-    def calc_temp_finished(self, oil_temp, annular_temp):
-        self.oil_temp, self.annular_temp = oil_temp, annular_temp
-        self.plot_with_canvas()
-
-    @QtCore.pyqtSlot(Pressure, Pressure)
-    def calc_pressure_finished(self, pressure_b, pressure_c):
-        self.pressure_b, self.pressure_c = pressure_b.pressure_delta, pressure_c.pressure_delta
-        self.ui.label_d_pressure_C.setText(str(pressure_c.pressure_delta) + 'MPa')
-        self.ui.label_d_pressure_B.setText(str(pressure_b.pressure_delta) + 'MPa')
-        self.ui.buttonResultSave.setDisabled(False)
-
-    def result_save(self):
-        try:
-            (oil_temp,
-             annular_temp,
-             pressure_b,
-             pressure_c,
-             ) = (
-                self.oil_temp,
-                self.annular_temp,
-                self.pressure_b,
-                self.pressure_c
-            )
-
-            file_name = QtWidgets.QFileDialog.getSaveFileName(self,
-                                                              '选择保存文件',
-                                                              filter='Excel files (*.xlsx)')
-
-            self.export_to_excel(file_name[0])
-            self.show_message('已保存计算结果{}'.format(file_name[0]))
-        except AttributeError:
-            # self.err_message('无法保存结果：未计算')
-            raise APBError
 
     def export_to_excel(self, filename):
         oil_temp, annular_temp = self.oil_temp, self.annular_temp
