@@ -125,15 +125,18 @@ class ParamsMixin:
         _convert_to_digit(params)
         self.params = params
 
-    def _read_params(self):
+    def read_params(self):
         try:
             self._read_and_convert()
         except ValueError:
             raise ParamsError('井身结构数据有误，请检查数据')
 
-    def _save_params(self, filename='temp.json'):
-        with open(filename, 'w') as f:
-            json.dump(self.params, f, indent=4)
+    def save_params(self, filename='temp.json'):
+        try:
+            with open(filename, 'w') as f:
+                json.dump(self.params, f, indent=4)
+        except Exception:
+            raise ParamsError('保存文件出错！')
 
     def load_params_from_file(self):
         try:
@@ -146,9 +149,9 @@ class ParamsMixin:
     def save_params_to_file(self):
 
         try:
-            self._read_params()
+            self.read_params()
             file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择保存文件', filter='JSON file(*.json)')
-            self._save_params(file_name[0])
+            self.save_params(file_name[0])
             self.show_message('保存了{}'.format(file_name[0]))
         except ParamsError as e:
             self.err_message(str(e))

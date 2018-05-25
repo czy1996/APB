@@ -104,8 +104,8 @@ class CalThread(QThread):
 
     def run(self):
         try:
-            self._parent._read_params()
-            self._parent._save_params()
+            self._parent.read_params()
+            self._parent.save_params()
             self._run_temp()
             self._run_pressure()
         except ParamsError as e:

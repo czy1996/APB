@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>920</width>
-    <height>600</height>
+    <width>917</width>
+    <height>588</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>APB计算器</string>
@@ -25,7 +19,7 @@
      <rect>
       <x>630</x>
       <y>430</y>
-      <width>91</width>
+      <width>201</width>
       <height>23</height>
      </rect>
     </property>
@@ -582,7 +576,7 @@
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>430</y>
+      <y>470</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -604,13 +598,26 @@
      <string>保存参数文件</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonResultSave">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>510</y>
+      <width>201</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>保存计算结果</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>920</width>
+     <width>917</width>
      <height>23</height>
     </rect>
    </property>
