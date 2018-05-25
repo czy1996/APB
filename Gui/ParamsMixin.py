@@ -138,7 +138,7 @@ class ParamsMixin:
         except Exception:
             raise ParamsError('保存文件出错！')
 
-    def load_params_from_file(self):
+    def params_load(self):
         try:
             file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择井身参数文件', filter='JSON file(*.json)')
             self._load_params(file_name[0])
@@ -146,11 +146,11 @@ class ParamsMixin:
         except ParamsError as e:
             self.err_message(str(e))
 
-    def save_params_to_file(self):
+    def params_save(self):
 
         try:
             self.read_params()
-            file_name = QtWidgets.QFileDialog.getOpenFileName(self, '选择保存文件', filter='JSON file(*.json)')
+            file_name = QtWidgets.QFileDialog.getSaveFileName(self, '选择保存文件', filter='JSON file(*.json)')
             self.save_params(file_name[0])
             self.show_message('保存了{}'.format(file_name[0]))
         except ParamsError as e:
