@@ -82,11 +82,6 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin, SlotMixin):
         self.worker.signal_calc_pressure_finished.connect(self.calc_pressure_finished)
         self.worker.start()
 
-    def thread_terminated(self):
-        print('thread terminated')
-        self.ui.buttonRun.setDisabled(False)
-        print(self.worker, 'is running', self.worker.isRunning())
-
     def show_message(self, message):
         """
         在状态栏输出消息
@@ -118,39 +113,3 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin, SlotMixin):
         axes.legend(loc='best', fontsize='small')
         self.canvas.draw()
 
-    def export_to_excel(self, filename):
-        oil_temp, annular_temp = self.oil_temp, self.annular_temp
-        data = {
-            '地温': oil_temp.temps_earth_in_C,
-            '油管流体': oil_temp.temps_in_C,
-            '环空A': annular_temp.temps_A_in_C,
-            '环空B': annular_temp.temps_B_in_C,
-            '环空C': annular_temp.temps_C_in_C,
-        }
-        zindex = {
-            '地温': oil_temp.zindex,
-            '油管流体': oil_temp.zindex,
-            '环空A': annular_temp.zindex_A,
-            '环空B': annular_temp.zindex_B,
-            '环空C': annular_temp.zindex_C,
-        }
-        depth = oil_temp.params['well']['casing1']['depth']
-
-        writer = pd.ExcelWriter(filename, engine='openpyxl')
-        for sheet_name, array in data.items():
-            df = pd.DataFrame({
-                '深度': depth - zindex[sheet_name],
-                '地温': oil_temp.temps_earth_in_C[-array.shape[0]:],
-                sheet_name: array,
-            })
-            df.to_excel(writer,
-                        sheet_name=sheet_name,
-                        index=False)
-        df = pd.DataFrame({
-            '环空B MPa': [self.pressure_b],
-            '环空C MPa': [self.pressure_c],
-        }, index=['压力'])
-        df.to_excel(writer,
-                    sheet_name='压力',
-                    )
-        writer.save()
