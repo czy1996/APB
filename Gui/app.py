@@ -4,11 +4,12 @@ from Gui.mainWindow import Ui_MainWindow
 
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QVBoxLayout, QMessageBox
+
+import matplotlib as mpl
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import matplotlib as mpl
 
-from .ParamsMixin import ParamsMixin, ParamsError
+from .ParamsMixin import ParamsMixin
 from .CalThread import CalThread
 from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
@@ -55,14 +56,14 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin):
     def setup(self):
         self.setFixedSize(920, 600)
 
-        self.ui.buttonRun.clicked.connect(self.buttonRun_cb)
+        self.ui.buttonRun.clicked.connect(self.run_cal_thread)
         self.ui.buttonParamsLoad.clicked.connect(self.load_params_from_file)
         self.ui.buttonParamsSave.clicked.connect(self.save_params_to_file)
         self.ui.buttonResultSave.setDisabled(True)
 
         self.init_canvas()
 
-    def buttonRun_cb(self):
+    def run_cal_thread(self):
         # self.ui.label_message.setText('button clicked')
         self.ui.buttonRun.setDisabled(True)
         self.worker = CalThread(self)

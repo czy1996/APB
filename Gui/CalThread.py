@@ -1,13 +1,10 @@
-from PyQt5 import QtCore
 from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5.QtGui import QPixmap
 
 from Params import Params
 from OilTemp import OilTemp
 from AnnularTemp import AnnularTemp
 from AnnularPressure import Pressure
 from .ParamsMixin import ParamsError
-from common import plot
 
 
 class CalThread(QThread):
