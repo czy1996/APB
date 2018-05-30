@@ -5,6 +5,8 @@ from OilTemp import OilTemp
 from AnnularPressure import Pressure
 from AnnularTemp import AnnularTemp
 
+from .CalThread import CalThread
+
 
 class SlotMixin:
     """
@@ -56,6 +58,19 @@ class SlotMixin:
         print('thread terminated')
         self.ui.buttonRun.setDisabled(False)
         print(self.worker, 'is running', self.worker.isRunning())
+
+    @QtCore.pyqtSlot()
+    def run_cal_thread(self):
+        # self.ui.label_message.setText('button clicked')
+        self.ui.buttonRun.setDisabled(True)
+        self.ui.buttonResultSave.setDisabled(True)
+        self.worker = CalThread(self)
+        self.worker.finished.connect(self.thread_terminated)
+        self.worker.signal_show_status_message.connect(self.show_message)
+        self.worker.signal_show_err_message.connect(self.err_message)
+        self.worker.signal_calc_temp_finished.connect(self.calc_temp_finished)
+        self.worker.signal_calc_pressure_finished.connect(self.calc_pressure_finished)
+        self.worker.start()
 
     def _export_to_excel(self, filename):
         oil_temp, annular_temp = self.oil_temp, self.annular_temp

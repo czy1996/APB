@@ -66,18 +66,6 @@ class MainWindow(QtWidgets.QMainWindow, ParamsMixin, SlotMixin):
 
         self.init_canvas()
 
-    def run_cal_thread(self):
-        # self.ui.label_message.setText('button clicked')
-        self.ui.buttonRun.setDisabled(True)
-        self.ui.buttonResultSave.setDisabled(True)
-        self.worker = CalThread(self)
-        self.worker.finished.connect(self.thread_terminated)
-        self.worker.signal_show_status_message.connect(self.show_message)
-        self.worker.signal_show_err_message.connect(self.err_message)
-        self.worker.signal_calc_temp_finished.connect(self.calc_temp_finished)
-        self.worker.signal_calc_pressure_finished.connect(self.calc_pressure_finished)
-        self.worker.start()
-
     def show_message(self, message):
         """
         在状态栏输出消息
